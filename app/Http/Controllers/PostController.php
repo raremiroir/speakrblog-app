@@ -5,62 +5,70 @@ namespace App\Http\Controllers;
 use App\Models\Post;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\View\View;
 
 class PostController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     */
-    public function index(): Response
-    {
-        return response('Hello World', 200);
+    // Display all posts
+    public function index() {
+        $posts = Post::with('user')->latest()->paginate(20);
+        return view('posts.index', compact('posts'));
     }
 
-    /**
-     * Show the form for creating a new resource.
-     */
-    public function create()
-    {
-        //
+    // Display form to create a new post
+    public function create(Request $request): View {
+        return view('posts.add', [
+            'user' => $request->user(),
+        ]);
     }
 
-    /**
-     * Store a newly created resource in storage.
-     */
-    public function store(Request $request)
-    {
-        //
+    // Store a new post in the database
+    public function store(Request $request) {
+        $request->validate([
+            'title' => 'required|max:255',
+            'body' => 'required',
+        ]);
+
+        $post = new Post();
+        $post->title = $request->input('title');
+        $post->body = $request->input('body');
+        // $post->user_id = auth()->user()->id;
+        $post->user_id = Auth::id();
+        $post->save();
+
+        return redirect()->route('posts.show', $post);
     }
 
-    /**
-     * Display the specified resource.
-     */
-    public function show(Post $post)
-    {
-        //
+    // Display a single post
+    public function show(Post $post) {
+        // $post->load('comments.user');
+        $comments = $post->comments()->with('user')->get();
+        return view('posts.show', compact('post', 'comments'));
     }
 
-    /**
-     * Show the form for editing the specified resource.
-     */
-    public function edit(Post $post)
-    {
-        //
+    // Display form to edit existing post
+    public function edit(Post $post) {
+        return view('posts.edit', compact('post'));
     }
 
-    /**
-     * Update the specified resource in storage.
-     */
-    public function update(Request $request, Post $post)
-    {
-        //
+    // Update existing post in the database
+    public function update(Request $request, Post $post) {
+        $request->validate([
+            'title' => 'required|max:255',
+            'body' => 'required',
+        ]);
+
+        $post->title = $request->input('title');
+        $post->body = $request->input('body');
+        $post->save();
+
+        return redirect()->route('posts.show', $post);
     }
 
-    /**
-     * Remove the specified resource from storage.
-     */
-    public function destroy(Post $post)
-    {
-        //
+    // Delete a post
+    public function destroy(Post $post) {  
+        $post->delete();
+        return redirect()->route('posts.index');
     }
 }
