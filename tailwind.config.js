@@ -47,10 +47,11 @@ module.exports = {
                     'd2': '#B37C00',
                     'd3': '#996D00',
                 },
-            fontFamily: {
-                sans: ['Figtree', ...defaultTheme.fontFamily.sans],
             },
-            }
+            fontFamily: {
+                title: ['Marmelad', ...defaultTheme.fontFamily.sans],
+                sans: ['Raleway', ...defaultTheme.fontFamily.sans],
+            },
         },
     },
 
