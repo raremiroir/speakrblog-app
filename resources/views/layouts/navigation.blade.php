@@ -5,17 +5,21 @@
             <div class="flex">
                 <!-- Logo -->
                 <div class="shrink-0 flex items-center">
-                    <a href="{{ route('posts.index') }}">
+                    <a href="{{ route('posts.index') }}" class="flex gap-2 items-center justify-start">
                         <x-application-logo class="block h-10 w-auto fill-current" />
+                        <div class="flex flex-col gap-0 items-start justify-center">
+                            <span class="text-success dark:text-success-l2 font-title text-xl">SPEAKR</span>
+                            <span class="text-gray-600 dark:text-success-l2/80 text-xs">Speak your Mind</span>
+                        </div>
                     </a>
                 </div>
 
                 <!-- Navigation Links -->
                 <div class="hidden space-x-8 sm:-my-px sm:ml-10 sm:flex">
-                    <x-nav-link href="/" :active="request()->routeIs('home')">
+                    <x-nav-link :href="route('posts.index')" :active="request()->routeIs('posts.index')">
                         {{ __('All Speaks') }}
                     </x-nav-link>
-                    <x-nav-link :href="route('posts.index')" :active="request()->routeIs('posts.index')">
+                    <x-nav-link :href="route('posts.add')" :active="request()->routeIs('posts.create')">
                         {{ __('Speak your Mind') }}
                     </x-nav-link>
                 </div>
