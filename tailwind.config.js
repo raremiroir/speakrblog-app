@@ -1,4 +1,6 @@
 const defaultTheme = require('tailwindcss/defaultTheme');
+const pluginLineClamp = require('@tailwindcss/line-clamp');
+const pluginForms = require('@tailwindcss/forms');
 
 /** @type {import('tailwindcss').Config} */
 module.exports = {
@@ -55,5 +57,6 @@ module.exports = {
         },
     },
 
-    plugins: [require('@tailwindcss/forms')],
+    plugins: [pluginLineClamp, pluginForms],
+    darkMode: 'class',
 };
