@@ -1,4 +1,5 @@
 @props([
+   'type' => 'button',
    'size' => 'md',
    'color' => 'default',
    'outlined' => false,
@@ -7,6 +8,7 @@
    'circle' => false,
    'flat' => false,
    'uppercase' => false,
+   'class' => '',
 ])
 
 @php
@@ -39,13 +41,16 @@
 
    $active = 'active:translate-y-0.5';
    $transition = 'transition-all duration-300 ease-in-out';
+   $flex = 'flex gap-2 items-center justify-center';
 
    $default = 'font-semibold border-2';
 
-   $classes = "$transition $default $active $outlinedClass $colorClass $sizeClass $blockClass $squareClass $circleClass $flatClass $uppercaseClass";
+   $classes = "$transition $flex $default $active $outlinedClass $colorClass $sizeClass $blockClass $squareClass $circleClass $flatClass $uppercaseClass";
+   $type = $type ?? 'button';
+   $classes .= ' ' . $class;
 
 @endphp
 
-<button class="{{$classes}}">
+<button class="{{$classes}}" type="{{$type}}">
       {{ $slot }}
 </button>
