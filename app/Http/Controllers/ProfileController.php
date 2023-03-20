@@ -13,11 +13,20 @@ use Illuminate\View\View;
 
 class ProfileController extends Controller
 {
+    // Display all users.
+    public function index(Request $request): View {
+        $users = User::paginate(20);
+        return view('profile.index', [
+            'user' => $request->user(),
+            'users' => $users,
+        ]);
+    }
+
     // Display a user's profile.
     public function show(Request $request, User $user): View {
         $posts = Post::where('user_id', $user->id)->latest()->paginate(20);
         return view('profile.show', [
-            'user' => $request->user(),
+            'user' => $user,
             'posts' => $posts,
         ]);
     }
