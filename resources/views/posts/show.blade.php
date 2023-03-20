@@ -5,8 +5,8 @@
                 {{ $post->title }}
             </x-header>
             <div class="flex flex-col gap-2 items-end">
-                <div class="flex gap-2 justify-end">
-                    @if (Auth::check() && ($post->user_id === Auth::user()->id))
+                @if (Auth::check() && ($post->user_id === Auth::user()->id))
+                    <div class="flex gap-2 justify-end">
                         <x-button color="info" size="xs" class="opacity-60 hover:opacity-80" href="{{ route('posts.edit', $post->id) }}">
                             <i class="fas fa-edit"></i> Edit
                         </x-button>
@@ -17,11 +17,12 @@
                                 <i class="fas fa-trash"></i> Delete
                             </x-button>
                         </form>
-                    @endif
-                </div>
-                <div class="flex flex-col gap-0">
+                    </div>
+                    <hr class="w-full border-gray-400 dark:border-gray-600 "/>
+                @endif
+                <div class="flex flex-col gap-0 items-end">
                     <div class="text-gray-500">{{ $post->created_at }}</div>
-                    <div class="text-gray-500">by {{ $post->user->username }}</div>
+                    <div class="text-gray-500">by <a href="{{ route('users.show', $post->user->username) }}" class="text-success/80 font-semibold hover:text-success">{{ $post->user->username }}</a></div>
                 </div>
             </div>
         </div>
