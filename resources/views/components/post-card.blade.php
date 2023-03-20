@@ -17,15 +17,15 @@
     class="
       {{ $defaultClasses }}
       mb-4 py-4 px-6 
-      w-2/3 rounded-2xl
+      w-11/12 md:w-5/6 xl:w-3/5 rounded-2xl
       ">
 
       {{-- Card Header --}}
-   <div class="flex justify-between">
+   <div class="flex flex-col lg:flex-row justify-between gap-2 items-start lg:items-center">
       {{-- Title --}}
-      <h5 class="card-title text-2xl font-title text-success border-b-2 border-success/40">{{ $post->title }}</h5>
+      <h5 class="order-last lg:order-first text-2xl font-title text-success border-b-2 border-success/40">{{ $post->title }}</h5>
       {{-- Authored by --}}
-      <div class="float-right text-xs text-gray-400 dark:text-gray-500">
+      <div class="order-first lg:order-last text-xs text-gray-400 dark:text-gray-500">
          Spoken by
          <a 
             href="{{ route('users.show', $post->user->username) }}" 
