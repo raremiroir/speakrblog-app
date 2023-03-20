@@ -41,7 +41,7 @@
    {{-- Card Body --}}
    <div class="pt-2">
       {{-- Text --}}
-      <p class="card-text">{{ $post->body }}</p>
+      <p class="card-text line-clamp-3">{{ $post->body }}</p>
       {{-- Image --}}
       {{-- @if ($post->image)
          <img src="{{ asset('storage/' . $post->image) }}" class="img-fluid mb-3" alt="Post image">
@@ -84,11 +84,9 @@
          </div> --}}
          {{-- Read more --}}
          <div class="flex justify-end">
-               <a href="{{ route('posts.show', $post->id) }}">
-                  <x-button color="transp" size="sm">
-                     Read more
-                  </x-button>
-               </a>
+            <x-button color="transp" size="sm" href="{{ route('posts.show', $post->id) }}">
+               Read more
+            </x-button>
          </div>
         </div>
     </div>

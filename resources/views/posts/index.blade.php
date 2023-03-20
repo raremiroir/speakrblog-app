@@ -3,11 +3,9 @@
         <x-header>
             {{ __('All Speaks') }}
             <x-slot name="append">
-                <a href={{ route('posts.add') }}>
-                    <x-button color="primary">
-                        Speak Something!
-                    </x-button>
-                </a>
+                <x-button color="primary" href="{{ route('posts.add') }}">
+                    Speak Something!
+                </x-button>
             </x-slot>
         </x-header>
     </x-slot>

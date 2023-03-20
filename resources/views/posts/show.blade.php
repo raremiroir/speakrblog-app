@@ -7,11 +7,9 @@
             <div class="flex flex-col gap-2 items-end">
                 <div class="flex gap-2 justify-end">
                     @if (Auth::check() && ($post->user_id === Auth::user()->id))
-                    <a href="{{ route('posts.edit', $post->id) }}">
-                            <x-button color="info" size="xs" class="opacity-60 hover:opacity-80">
-                                <i class="fas fa-edit"></i> Edit
-                            </x-button>
-                        </a>
+                        <x-button color="info" size="xs" class="opacity-60 hover:opacity-80" href="{{ route('posts.edit', $post->id) }}">
+                            <i class="fas fa-edit"></i> Edit
+                        </x-button>
                         <form method="POST" action="{{ route('posts.destroy', $post->id) }}" class="inline-block">
                             @csrf
                             @method('DELETE')

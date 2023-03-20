@@ -3,11 +3,9 @@
         <x-header>
             {{ __('Profile') }}
             <x-slot name="append">
-                <a href="{{ route('users.show', $user->username) }}">
-                    <x-button color="primary" size="sm">
-                        View Your Profile
-                    </x-button>
-                </a>
+                <x-button color="primary" size="sm" href="{{ route('users.show', $user->username) }}">
+                    View Your Profile
+                </x-button>
             </x-slot>
         </x-header>
     </x-slot>

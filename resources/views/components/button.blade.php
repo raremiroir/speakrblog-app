@@ -9,6 +9,8 @@
    'flat' => false,
    'uppercase' => false,
    'class' => '',
+   'disabled' => false,
+   'href' => null,
 ])
 
 @php
@@ -43,7 +45,7 @@
    $transition = 'transition-all duration-300 ease-in-out';
    $flex = 'flex gap-2 items-center justify-center';
 
-   $default = 'font-semibold border-2';
+   $default = 'cursor-pointer font-semibold border-2';
 
    $classes = "$transition $flex $default $active $outlinedClass $colorClass $sizeClass $blockClass $squareClass $circleClass $flatClass $uppercaseClass";
    $type = $type ?? 'button';
@@ -51,6 +53,12 @@
 
 @endphp
 
-<button class="{{$classes}}" type="{{$type}}">
+@if ($href)
+   <a href="{{$href}}" class="{{$classes}}" type="{{$type}}" disabled="{{$disabled}}">
       {{ $slot }}
-</button>
+   </a>
+@else 
+   <button class="{{$classes}}" type="{{$type}}" href="{{ $href }}" >
+         {{ $slot }}
+   </button>
+@endif
