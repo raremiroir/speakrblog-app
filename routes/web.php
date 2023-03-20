@@ -18,22 +18,29 @@ use Illuminate\Support\Facades\Route;
 */
 
 
-// Public routes
+/* ========================
+    Public routes 
+======================== */
 Route::get('/', [PostController::class, 'index'])->name('posts.index');
 
 Route::get('/home', [PostController::class, 'index'])->name('home');
+// Posts
 Route::get('/posts', [PostController::class, 'index'])->name('posts');
 Route::get('/posts/add', [PostController::class, 'create'])->name('posts.add');
 Route::get('/posts/{post}', [PostController::class, 'show'])->name('posts.show');
 Route::get('/posts/tags/{tag}', [PostController::class, 'indexByTag'])->name('posts.indexByTag');
+// Users
+Route::get('/users/{user}', [ProfileController::class, 'show'])->name('users.show');
 
-// Authenticated routes
+/* ========================
+    Authenticated routes
+======================== */
 Route::middleware(['auth'])->group(function () {
     // Profile routes
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
-
+    
     // Posts routes
     Route::post('/posts', [PostController::class, 'store'])->name('posts.store');
     Route::get('/posts/{post}', [PostController::class, 'show'])->name('posts.show');
