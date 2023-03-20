@@ -83,7 +83,7 @@
             </span>
          </div> --}}
          {{-- Read more --}}
-         <div class="col-md-6 text-right">
+         <div class="flex justify-end">
                <a href="{{ route('posts.show', $post->id) }}">
                   <x-button color="transp" size="sm">
                      Read more
