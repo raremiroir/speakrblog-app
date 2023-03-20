@@ -1,18 +1,15 @@
-<nav x-data="{ open: false }" class="bg-white dark:bg-gray-800 border-b border-gray-100 dark:border-gray-700">
+<nav 
+    x-data="{ open: false }" 
+    class="
+        fixed w-full shadow-lg
+        bg-white dark:bg-gray-800 
+        border-gray-100 dark:border-gray-700">
     <!-- Primary Navigation Menu -->
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div class="flex justify-between h-16 items-center">
             <div class="flex">
                 <!-- Logo -->
-                <div class="shrink-0 flex items-center">
-                    <a href="{{ route('posts.index') }}" class="flex gap-2 items-center justify-start">
-                        <x-application-logo class="block h-10 w-auto fill-current" />
-                        <div class="flex flex-col gap-0 items-start justify-center">
-                            <span class="text-success dark:text-success-l2 font-title text-xl">SPEAKR</span>
-                            <span class="text-gray-600 dark:text-success-l2/80 text-xs">Speak your Mind</span>
-                        </div>
-                    </a>
-                </div>
+                <x-logo />
 
                 <!-- Navigation Links -->
                 <div class="hidden space-x-8 sm:-my-px sm:ml-10 sm:flex">
@@ -32,7 +29,8 @@
                     <x-dropdown align="right" width="48">
                         <x-slot name="trigger">
                             <x-button color="primary" size="sm">
-                                <div class="py-[3px] flex">
+                                <div class="flex items-center gap-2">
+                                    <x-profile-avatar :user="Auth::user()" />
                                     <div>{{ Auth::user()->username }}</div>
         
                                     <div class="ml-1">
