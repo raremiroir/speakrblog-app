@@ -28,7 +28,7 @@
       <div class="float-right text-xs text-gray-400 dark:text-gray-500">
          Spoken by
          <a 
-            href="{{-- {{ /route('users.show', $post->user->id) }} --}}" 
+            href="{{ route('users.show', $post->user->username) }}" 
             class="text-success-d2/50 dark:text-success-l2/50 hover:text-success-d2 dark:hover:text-success-l2 font-bold hover:underline {{ $transition }}"
             >{{ $post->user->username }}</a> on <span class="font-semibold">{{ $post->created_at->format('d/m/Y') }}</span>
       </div>
