@@ -11,23 +11,20 @@
     </x-slot>
 
     <x-main-grid>
+        <x-profile-option-wrap>
+            @include('profile.partials.edit-avatar-form')
+        </x-profile-option-wrap>
 
-        <div class="p-4 sm:p-8 w-full bg-white dark:bg-gray-800 shadow sm:rounded-lg">
-            <div class="max-w-xl">
-                @include('profile.partials.update-profile-information-form')
-            </div>
-        </div>
+        <x-profile-option-wrap>
+            @include('profile.partials.update-profile-information-form')
+        </x-profile-option-wrap>
 
-        <div class="p-4 sm:p-8 w-full bg-white dark:bg-gray-800 shadow sm:rounded-lg">
-            <div class="max-w-xl">
-                @include('profile.partials.update-password-form')
-            </div>
-        </div>
+        <x-profile-option-wrap>
+            @include('profile.partials.update-password-form')
+        </x-profile-option-wrap>
 
-        <div class="p-4 sm:p-8 w-full bg-white dark:bg-gray-800 shadow sm:rounded-lg">
-            <div class="max-w-xl">
-                @include('profile.partials.delete-user-form')
-            </div>
-        </div>
+        <x-profile-option-wrap>
+            @include('profile.partials.delete-user-form')
+        </x-profile-option-wrap>
     </x-main-grid>
 </x-app-layout>
