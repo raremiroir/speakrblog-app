@@ -1,6 +1,5 @@
 <?php
 
-use App\Http\Controllers\HomeController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\PostController;
 use App\Http\Controllers\CommentController;
@@ -22,11 +21,11 @@ use Illuminate\Support\Facades\Route;
     Public routes 
 ======================== */
 Route::get('/', [PostController::class, 'index'])->name('posts.index');
-
 Route::get('/home', [PostController::class, 'index'])->name('home');
+
 // Posts
-Route::get('/posts', [PostController::class, 'index'])->name('posts');
 Route::get('/posts/add', [PostController::class, 'create'])->name('posts.add');
+Route::post('/posts', [PostController::class, 'store'])->name('posts.store');
 Route::get('/posts/{post}', [PostController::class, 'show'])->name('posts.show');
 Route::get('/posts/tags/{tag}', [PostController::class, 'indexByTag'])->name('posts.indexByTag');
 // Users
@@ -42,6 +41,8 @@ Route::middleware(['auth'])->group(function () {
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
     
     // Posts routes
+    Route::get('/posts', [PostController::class, 'index'])->name('posts');
+    Route::get('/posts/add', [PostController::class, 'create'])->name('posts.add');
     Route::post('/posts', [PostController::class, 'store'])->name('posts.store');
     Route::get('/posts/{post}', [PostController::class, 'show'])->name('posts.show');
     Route::get('/posts/{post}/edit', [PostController::class, 'edit'])->name('posts.edit');
