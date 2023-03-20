@@ -1,3 +1,27 @@
+@php
+    $placeholders = [
+        'The speaker\'s words were like a river, flowing endlessly and never to wither.',
+        'The speaker held their audience in thrall, weaving a tale that enthralled them all.',
+        'The floor is yours.',
+        'Start speaking your mind!',
+        'Speak your truth.',
+        'Unleash your inner chatterbox.',
+        'Speaking of speaking, how about sharing your latest brainwave with us?',
+        'The keyboard is your stage, the text area your mic.',
+        'Warning: speaking your mind may cause increased clarity and a sense of relief.',
+        'What\'s the point of having a mouth if you don\'t use it? Type away and speak your truth!',
+        'We can\'t read your mind. Start speaking already!',
+        'Speak into existence!',
+        'Silence may be golden, but your words are pure platinum.',
+        'There\'s a time to listen and a time to speak. This is definitely the latter.',
+        'Put your keyboard where your mouth is!',
+        'What do you call a talkative keyboard?',
+        'Speak of the devil and he shall appear.',
+    ];
+
+    $random_key = array_rand($placeholders);
+@endphp
+
 <x-app-layout>
    <x-slot name="header">
         <x-header>
@@ -5,32 +29,30 @@
         </x-header>
    </x-slot>
 
-   <div class="max-w-2xl mx-auto p-4 sm:p-6 lg:p-8">
+   <div class="max-w-5xl mx-auto p-4 sm:p-6 lg:p-8">
         @if (!Auth::check())
             <div class="bg-gray-100 dark:bg-gray-800 p-4 rounded-md">
                 {{ __('You are not allowed to create posts. Please log in or create an account.') }}
             </div>
         @else
-            {{-- <form method="POST" action="{{ route('posts.store') }}">
-                @csrf
-                <textarea name="message" placeholder="{{ __('What\'s on your mind?') }}"
-                    class="block w-full border-gray-300 focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50 rounded-md shadow-sm">{{ old('body') }}</textarea>
-                <x-input-error :messages="$errors->get('body')" class="mt-2" />
-                <x-primary-button class="mt-4">{{ __('Speak') }}</x-primary-button>
-            </form> --}}
             <form method="POST" action="{{ route('posts.store') }}">
                 @csrf
         
                 <div class="mb-4">
                     <x-input-label for="title" :value="__('Title')" />
-        
-                    <input id="title" class="form-input rounded-md shadow-sm mt-1 block w-full"  type="text"  name="title" :value="old('title')" required autofocus />
+                    <x-text-input 
+                        id="title" name="title" 
+                        type="text" :value="old('title')" 
+                        placeholder="Title"
+                        required autofocus 
+                    />
                 </div>
         
                 <div class="mb-4">
                     <x-input-label for="body" :value="__('Body')" />
-        
-                    <textarea id="body" name="body" class="form-input rounded-md shadow-sm mt-1 block w-full" rows="10" required>{{ old('body') }}</textarea>
+                    <x-textarea id="body" name="body" rows="10" required placeholder="{{ $placeholders[$random_key] }}">
+                        {{ old('body') }}
+                    </x-textarea>
                 </div>
         
                 <div class="flex items-center justify-end mt-4">
@@ -40,17 +62,5 @@
                 </div>
             </form>
         @endif
-
-
-
     </div>
-    {{-- 
-   <div class="py-12">
-       <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
-           <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg">
-               <div class="p-6 bg-white border-b border-gray-200">
-               </div>
-           </div>
-       </div>
-   </div> --}}
 </x-app-layout>
