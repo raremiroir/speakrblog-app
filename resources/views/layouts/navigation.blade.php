@@ -19,7 +19,7 @@
                     <x-nav-link :href="route('posts.index')" :active="request()->routeIs('posts.index')">
                         {{ __('All Speaks') }}
                     </x-nav-link>
-                    <x-nav-link :href="route('posts.add')" :active="request()->routeIs('posts.create')">
+                    <x-nav-link :href="route('posts.add')" :active="request()->routeIs('posts.add')">
                         {{ __('Speak your Mind') }}
                     </x-nav-link>
                 </div>
