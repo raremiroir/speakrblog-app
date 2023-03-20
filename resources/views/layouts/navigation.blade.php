@@ -19,6 +19,9 @@
                     <x-nav-link :href="route('posts.add')" :active="request()->routeIs('posts.add')">
                         {{ __('Speak your Mind') }}
                     </x-nav-link>
+                    <x-nav-link :href="route('users.index')" :active="request()->routeIs('users.index')">
+                        {{ __('All Speakrs') }}
+                    </x-nav-link>
                 </div>
             </div>
 
@@ -93,6 +96,9 @@
             </x-responsive-nav-link>
             <x-responsive-nav-link :href="route('posts.add')" :active="request()->routeIs('posts.add')">
                 {{ __('Speak your Mind') }}
+            </x-responsive-nav-link>
+            <x-responsive-nav-link :href="route('users.index')" :active="request()->routeIs('users.index')">
+                {{ __('All Speakrs') }}
             </x-responsive-nav-link>
         </div>
 

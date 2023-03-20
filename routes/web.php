@@ -29,6 +29,7 @@ Route::post('/posts', [PostController::class, 'store'])->name('posts.store');
 Route::get('/posts/{post}', [PostController::class, 'show'])->name('posts.show');
 Route::get('/posts/tags/{tag}', [PostController::class, 'indexByTag'])->name('posts.indexByTag');
 // Users
+Route::get('/users', [ProfileController::class, 'index'])->name('users.index');
 Route::get('/users/{user}', [ProfileController::class, 'show'])->name('users.show');
 
 /* ========================
