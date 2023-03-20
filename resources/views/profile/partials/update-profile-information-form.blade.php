@@ -48,7 +48,9 @@
         </div>
 
         <div class="flex items-center gap-4">
-            <x-primary-button>{{ __('Save') }}</x-primary-button>
+            <x-button type="submit" color="primary">
+                {{ __('Save') }}
+            </x-button>
 
             @if (session('status') === 'profile-updated')
                 <p
