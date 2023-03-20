@@ -11,13 +11,16 @@
    'class' => '',
    'disabled' => false,
    'href' => null,
+   'target' => null,
+   'title' => '',
+   'id' => null,
 ])
 
 @php
    $colors = [
       'default'   => 'text-gray-800 dark:text-gray-200 border-gray-200 dark:border-gray-700 bg-gray-200 dark:bg-gray-700 hover:bg-gray-300 hover:border-gray-300 dark:hover:bg-gray-600 dark:hover:border-gray-600 focus:bg-gray-200 dark:focus:bg-gray-700 active:bg-gray-400 dark:active:bg-gray-500 focus:border-gray-400 dark:focus:border-gray-500',
-      'primary'   => 'text-gray-800 dark:text-gray-200 border-gray-200 dark:border-gray-700 bg-gray-200 dark:bg-gray-700 hover:bg-success hover:border-success hover:text-gray-200 dark:hover:border-success-l1 dark:hover:bg-success-l1 dark:hover:text-gray-800 focus:bg-gray-200 dark:focus:bg-gray-700 active:bg-success-d1 active:text-gray-100 dark:active:bg-success-l3 dark:active:text-gray-800 dark:active:border-success-l3 focus:text-gray-800 dark:focus:text-gray-200 focus:border-success dark:focus:border-success-l2',
-      'transp'    => '!shadow-none bg-transparent text-gray-800 dark:text-gray-200 hover:bg-gray-400 dark:hover:bg-gray-600 hover:bg-opacity-25 focus:bg-gray-400 dark:focus:bg-gray-600 focus:bg-opacity-25 active:bg-gray-500 active:bg-opacity-25 focus:border-gray-400 dark:focus:border-gray-500',
+      'primary'   => 'text-gray-800 dark:text-gray-200 border-gray-200 dark:border-gray-700 bg-gray-200 dark:bg-gray-700 hover:bg-success hover:border-success hover:text-gray-200 dark:hover:border-success-l1 dark:hover:bg-success-l1 dark:hover:text-gray-800 focus:bg-success/20 dark:focus:bg-success-l1/20 active:bg-success-d1 active:text-gray-100 dark:active:bg-success-l3 dark:active:text-gray-800 dark:active:border-success-l3 focus:text-gray-800 dark:focus:text-gray-200 focus:border-success dark:focus:border-success-l2',
+      'transp'    => '!shadow-none bg-transparent text-success-d1 dark:text-success-l1 hover:bg-success/20 dark:hover:bg-success-l1/20 focus:bg-success/20 dark:focus:bg-success-l1/20 active:bg-success-d1/20 dark:active:bg-success/20 focus:border-success-d1/40 dark:focus:border-success/40',
       'success'   => 'border-success bg-success text-gray-200 hover:border-success-d1 hover:bg-success-d1 focus:bg-success-d1 focus:border-success-l1/60 active:border-success-d2 active:bg-success-d2',
       'error'     => 'border-error bg-error text-gray-200 hover:border-error-d1 hover:bg-error-d1 focus:bg-error-d1 focus:border-error-l1/60 active:border-error-d2 active:bg-error-d2',
       'warning'   => 'border-warning bg-warning text-gray-800 hover:border-warning-d1 hover:bg-warning-d1 focus:bg-warning-d1 focus:border-warning-l1/60 active:border-warning-d2 active:bg-warning-d2',
@@ -54,11 +57,11 @@
 @endphp
 
 @if ($href)
-   <a href="{{$href}}" class="{{$classes}}" type="{{$type}}" disabled="{{$disabled}}">
+   <a href="{{$href}}" class="{{$classes}}" type="{{$type}}" disabled="{{$disabled}}" id={{ $id?? '' }} target={{ $target?? '_blank' }} title={{ $title }} aria-label={{ $title }} >
       {{ $slot }}
    </a>
 @else 
-   <button class="{{$classes}}" type="{{$type}}" href="{{ $href }}" >
+   <button class="{{$classes}}" type="{{$type}}" id={{ $id?? '' }} target={{ $target?? '_blank' }} title={{ $title }} aria-label={{ $title }}>
          {{ $slot }}
    </button>
 @endif
