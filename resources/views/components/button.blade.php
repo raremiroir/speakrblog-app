@@ -48,7 +48,7 @@
    $transition = 'transition-all duration-300 ease-in-out';
    $flex = 'flex gap-2 items-center justify-center';
 
-   $default = 'cursor-pointer font-semibold border-2';
+   $default = 'group cursor-pointer font-semibold border-2';
 
    $classes = "$transition $flex $default $active $outlinedClass $colorClass $sizeClass $blockClass $squareClass $circleClass $flatClass $uppercaseClass";
    $type = $type ?? 'button';
