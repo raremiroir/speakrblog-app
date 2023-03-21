@@ -57,11 +57,11 @@
 @endphp
 
 @if ($href)
-   <a href="{{$href}}" class="{{$classes}}" type="{{$type}}" disabled="{{$disabled}}" id={{ $id?? '' }} target={{ $target?? '_blank' }} title={{ $title }} aria-label={{ $title }} >
+   <a href="{{$href}}" class="{{$classes}}" type="{{$type}}" disabled="{{$disabled}}" id={{ $id?? '' }} target="{{ $target?? '_blank' }}" title="{{ $title }}" aria-label="{{ $title }}" >
       {{ $slot }}
    </a>
 @else 
-   <button class="{{$classes}}" type="{{$type}}" id={{ $id?? '' }} target={{ $target?? '_blank' }} title={{ $title }} aria-label={{ $title }}>
+   <button class="{{$classes}}" type="{{$type}}" id={{ $id?? '' }} target="{{ $target?? '_blank' }}" title="{{ $title }}" aria-label="{{ $title }}">
          {{ $slot }}
    </button>
 @endif
