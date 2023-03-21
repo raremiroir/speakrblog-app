@@ -10,7 +10,7 @@
             {{ $user->username }}
          </x-header>
          <div class="flex w-fit whitespace-nowrap">
-            <small>Member since {{ $joined_on }}</small>
+            <small class="font-medium text-gray-600 dark:text-gray-400">Member since {{ $joined_on }}</small>
          </div>
       </div>
    </x-slot>
