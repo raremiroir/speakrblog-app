@@ -60,28 +60,43 @@
    <div class="card-footer">
       <div class="row">
          {{-- Like --}}
-         {{-- <div class="col-md-6">
+         <div class="col-md-6">
             @auth
-               @if ($post->likedBy(auth()->user()))
-                  <form action="{{ route('posts.likes', $post->id) }}" method="POST">
+               @if ($post->isLikedByUser(auth()->user()))
+                  <form action="{{ route('posts.unlike', $post->id) }}" method="POST">
                         @csrf
                         @method('DELETE')
-                        <button type="submit" class="btn btn-danger btn-sm">Unlike</button>
+                        <x-button type="submit" size="sm" color="success"
+                        >
+                        <i class="fas fa-heart"></i>
+                        <span class="badge badge-pill badge-secondary">
+                           {{ $post->likes->count() }}
+                           {{ Str::plural('like', $post->likes->count()) }}
+                        </span>
+                     </x-button>
                   </form>
                @else
-                  <form action="{{ route('posts.likes', $post->id) }}" method="POST">
+                  <form action="{{ route('posts.like', $post->id) }}" method="POST">
                         @csrf
-                        <button type="submit" class="btn btn-primary btn-sm">Like</button>
+                        <x-button type="submit" size="sm" color="primary"
+                        >
+                        <i class="far fa-heart"></i>
+                        <span class="badge badge-pill badge-secondary">
+                           {{ $post->likes->count() }}
+                           {{ Str::plural('like', $post->likes->count()) }}
+                        </span>
+                     </x-button>
                   </form>
                @endif
             @else
-               <a href="{{ route('login') }}" class="btn btn-primary btn-sm">Like</a>
+               <a href="{{ route('login') }}" class="btn btn-primary btn-sm">
+                  <span class="badge badge-pill badge-secondary">
+                     {{ $post->likes->count() }}
+                     {{ Str::plural('like', $post->likes->count()) }}
+                  </span>
+               </a>
             @endauth
-            <span class="badge badge-pill badge-secondary">
-               {{ $post->likes->count() }}
-               {{ Str::plural('like', $post->likes->count()) }}
-            </span>
-         </div> --}}
+         </div>
          {{-- Read more --}}
          <div class="flex justify-end">
             <x-button color="transp" size="sm" href="{{ route('posts.show', $post->id) }}">

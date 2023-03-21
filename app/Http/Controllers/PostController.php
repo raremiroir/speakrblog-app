@@ -4,7 +4,6 @@ namespace App\Http\Controllers;
 
 use App\Models\Post;
 use Illuminate\Http\Request;
-use Illuminate\Http\Response;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\View\View;
 
@@ -70,5 +69,16 @@ class PostController extends Controller
     public function destroy(Post $post) {  
         $post->delete();
         return redirect()->route('posts.index');
+    }
+
+    // Like a post
+    public function like(Post $post) {
+        auth()->user()->likedPosts()->syncWithoutDetaching($post->id);
+        return back();
+    }
+    // Unlike a post
+    public function unlike(Post $post) {
+        auth()->user()->likedPosts()->detach($post->id);
+        return back();
     }
 }
