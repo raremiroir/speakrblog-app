@@ -1,11 +1,11 @@
 @props([
-   'active' => false,
    'user' => null,
 ])
 
 @php
    $transition = 'transition-all duration-300 ease-in-out';
-   $active = $active ?? false;
+
+   $active = Auth::check() && Auth::user()->id === $user->id ? true : false;
    $user = $user ?? null;
 @endphp
 

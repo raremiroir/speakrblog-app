@@ -14,11 +14,7 @@
    <div class="w-11/12 lg:w-4/5 mx-auto">
       <div class="mt-12 flex flex-row flex-wrap gap-4">
          @foreach($users as $currUser)
-            @if (Auth::check() && $currUser->id == Auth::user()->id) 
-                <x-user-card :user="$currUser" active />
-            @else
-                <x-user-card :user="$currUser" />
-            @endif
+            <x-user-card :user="$currUser" />
          @endforeach
       </div>
    </div>
