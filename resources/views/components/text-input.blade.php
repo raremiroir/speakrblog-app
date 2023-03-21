@@ -5,9 +5,10 @@
    {{ $attributes }}
    class="
       transition-all duration-200 ease-in-out
-      w-full
+      w-full h-full
       border-transparent 
       bg-gray-300/40
+      px-2 py-1
       tracking-wider 
       font-semibold dark:font-medium
       dark:bg-gray-800
