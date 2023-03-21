@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Post;
+use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\View\View;
@@ -80,5 +81,13 @@ class PostController extends Controller
     public function unlike(Post $post) {
         auth()->user()->likedPosts()->detach($post->id);
         return back();
+    }
+
+    // Search for posts
+    public function search(Request $request) {
+        $search = $request->input('search');
+        $posts = Post::search($search)->get();
+        $users = User::search($search)->get();
+        return view('search', compact('posts', 'users', 'search'));
     }
 }
