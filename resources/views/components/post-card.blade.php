@@ -17,6 +17,7 @@
     class="
       {{ $defaultClasses }}
       mb-4 py-4 px-6 
+      flex flex-col gap-4
       w-11/12 md:w-5/6 xl:w-3/5 rounded-2xl
       ">
 
@@ -25,12 +26,14 @@
       {{-- Title --}}
       <h5 class="order-last lg:order-first text-2xl font-title text-success border-b-2 border-success/40">{{ $post->title }}</h5>
       {{-- Authored by --}}
-      <div class="order-first lg:order-last text-xs text-gray-400 dark:text-gray-500">
-         Spoken by
+      <div class="order-first lg:order-last text-xs text-gray-400 dark:text-gray-500 whitespace-nowrap flex items-center">
          <a 
             href="{{ route('users.show', $post->user->username) }}" 
-            class="text-success-d2/50 dark:text-success-l2/50 hover:text-success-d2 dark:hover:text-success-l2 font-bold hover:underline {{ $transition }}"
-            >{{ $post->user->username }}</a> on <span class="font-semibold">{{ $post->created_at->format('d/m/Y') }}</span>
+            class="text-success-d2/50 dark:text-success-l2/50 hover:text-success-d2 dark:hover:text-success-l2 font-bold hover:underline {{ $transition }} flex gap-2 items-center"
+            >
+               <x-profile-avatar :user="$post->user" />
+               Spoken by {{ $post->user->username }}
+         </a>&nbsp;on&nbsp;<span class="font-semibold">{{ $post->created_at->format('d/m/Y') }}</span>
       </div>
       {{-- Deleted --}}
       @if ($post->trashed())
@@ -57,8 +60,7 @@
    </div>
 
    {{-- Card Footer --}}
-   <div class="card-footer">
-      <div class="row">
+   <div class="flex flex-row justify-between items-center">
          {{-- Like --}}
          <div class="col-md-6">
             @auth
@@ -100,9 +102,8 @@
          {{-- Read more --}}
          <div class="flex justify-end">
             <x-button color="transp" size="sm" href="{{ route('posts.show', $post->id) }}">
-               Read more
+               Read more...
             </x-button>
          </div>
-        </div>
     </div>
 </div>
