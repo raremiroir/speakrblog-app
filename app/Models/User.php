@@ -63,4 +63,9 @@ class User extends Authenticatable
     public function isAdmin() {
         return $this->role === 'admin';
     }
+
+    // Search function
+    public function scopeSearch($query, $search) {
+        return $query->where('username', 'LIKE', "%{$search}%");
+    }
 }

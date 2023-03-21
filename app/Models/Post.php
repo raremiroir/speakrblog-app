@@ -33,14 +33,21 @@ class Post extends Model
     }
 
     // Check if post is liked by user
-    public function isLikedByUser(User $user)
-    {
+    public function isLikedByUser(User $user) {
         return $this->likes()->where('user_id', auth()->id())->exists();
     }
 
-    public function tags()
-    {
+    public function tags() {
         return $this->belongsToMany(Tag::class)->withTimestamps();
+    }
+
+    // Search function
+    public function scopeSearch($query, $search) {
+        return $query->where('title', 'LIKE', "%{$search}%")
+            // ->orWhereHas('tags', function($query) use ($search) {
+            //     $query->where('name', 'LIKE', "%{$search}%");
+            // })
+            ->orWhere('body', 'LIKE', "%{$search}%");
     }
     
 }
