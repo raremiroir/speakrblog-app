@@ -33,7 +33,7 @@ class TagController extends Controller
 
         $tag = Tag::firstOrCreate([
             'name' => $request->input('name'),
-            'color' => $request->input('colorSelected'),
+            'color' => $request->input('color'),
         ]);
 
         return redirect()->route('posts.tags.index', $tag);
@@ -52,7 +52,7 @@ class TagController extends Controller
         ]);
 
         $tag->name = $request->input('name');
-        $tag->color = $request->input('colorSelected');
+        $tag->color = $request->input('color');
         $tag->save();
 
         return redirect()->route('posts.tags.show', $tag);
