@@ -7,7 +7,7 @@
 
 
    $transition = 'transition-all duration-200 ease-in-out';
-   $bg = 'bg-gray-200 dark:bg-gray-600/20 hover:bg-gray-300 dark:hover:bg-gray-600/40';
+   $bg = 'bg-gray-200 dark:bg-gray-800 hover:bg-gray-300 dark:hover:bg-gray-600/40';
    $text = 'text-gray-900 dark:text-gray-300';
 
    $defaultClasses = "$transition $bg $text";
@@ -18,7 +18,7 @@
       {{ $defaultClasses }}
       mb-4 py-4 px-6 
       flex flex-col gap-4
-      w-11/12 md:w-5/6 xl:w-3/5 rounded-2xl
+      w-full rounded-2xl
       ">
 
       {{-- Card Header --}}
