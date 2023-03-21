@@ -37,5 +37,52 @@
                 {{ $slot }}
             </main>
         </div>
+        <script>
+            const searchToggle = document.getElementById('search-toggle');
+            const searchContainer = document.getElementById('search-container');
+            const searchInput = document.getElementById('search-input');
+            const searchResults = document.getElementById('search-results');
+            const closeSearchBtn = document.getElementById('close-search-btn');
+
+            document.addEventListener('keydown', event => {
+                if (event.ctrlKey && event.key === 'k') {
+                    event.preventDefault();
+                    const searchToggle = document.getElementById('search-toggle');
+                    searchToggle.click();
+                }
+                if (event.key === 'Escape') {
+                    event.preventDefault();
+                    const searchToggle = document.getElementById('search-toggle');
+                    const searchContainer = document.getElementById('search-container');
+                    searchContainer.classList.add('hidden');
+                    searchInput.value = '';
+                    searchResults.innerHTML = '';
+                }
+            })
+
+            searchToggle.addEventListener('click', () => {
+                searchContainer.classList.toggle('hidden');
+                searchInput.focus();
+            });
+            closeSearchBtn.addEventListener('click', () => {
+                searchContainer.classList.add('hidden');
+                searchInput.value = '';
+                searchResults.innerHTML = '';
+            });
+
+            searchInput.addEventListener('input', () => {
+                const searchValue = searchInput.value.trim();
+
+                if (searchValue.length >= 2) {
+                    fetch(`{{ route('search') }}?search=${searchValue}`)
+                        .then(response => response.text())
+                        .then(html => {
+                        searchResults.innerHTML = html;
+                        });
+                } else {
+                    searchResults.innerHTML = '';
+                }
+            });
+        </script>
     </body>
 </html>
