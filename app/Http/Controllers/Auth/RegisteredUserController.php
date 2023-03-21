@@ -40,6 +40,7 @@ class RegisteredUserController extends Controller
             'username' => $request->username,
             'email' => $request->email,
             'password' => Hash::make($request->password),
+            'avatar' => 'https://source.boringavatars.com/beam/150/' . $request->username . '?colors=a9ddaa,d1d5db,8fb4da,f3a2a2,ffd575',
         ]);
 
         event(new Registered($user));
