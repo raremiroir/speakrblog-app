@@ -47,8 +47,12 @@
                         </x-slot>
 
                         <x-slot name="content">
+                            <x-dropdown-link :href="route('users.show', Auth::user()->username)">
+                                <i class="fas fa-user-circle"></i> {{ __('My Profile') }}
+                            </x-dropdown-link>
+
                             <x-dropdown-link :href="route('profile.edit')">
-                                <i class="fas fa-user-circle"></i> {{ __('Profile') }}
+                                <i class="fas fa-user-cog"></i> {{ __('Account Settings') }}
                             </x-dropdown-link>
 
                             <!-- Authentication -->
@@ -109,8 +113,12 @@
             </div>
 
             <div class="mt-3 space-y-1">
+                <x-responsive-nav-link :href="route('users.show', Auth::user()->username)">
+                    <i class="fas fa-user-circle"></i> {{ __('My Profile') }}
+                </x-responsive-nav-link>
+
                 <x-responsive-nav-link :href="route('profile.edit')">
-                    {{ __('Profile') }}
+                    <i class="fas fa-user-cog"></i> {{ __('Account Settings') }}
                 </x-responsive-nav-link>
 
                 <!-- Authentication -->
@@ -120,7 +128,7 @@
                     <x-responsive-nav-link :href="route('logout')"
                             onclick="event.preventDefault();
                                         this.closest('form').submit();">
-                        {{ __('Log Out') }}
+                        <i class="fas fa-sign-out-alt"></i> {{ __('Log Out') }}
                     </x-responsive-nav-link>
                 </form>
             </div>
