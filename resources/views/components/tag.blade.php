@@ -21,7 +21,7 @@
 
 <a href="{{ route('posts.tags.show', $tag) }}" 
    class="tag text-clip font-semibold tracking-wide rounded-lg {{ $class }}"
-   style="background: #{{ $tag->color }} !important;"
+   style="background: {{ $tag->color }} !important;"
    >
    {{ $tag->name }}
 </a>
