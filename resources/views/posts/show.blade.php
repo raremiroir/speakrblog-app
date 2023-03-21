@@ -67,10 +67,12 @@
         </div>
 
         {{-- Comments --}}
-        <div class="w-full bg-white shadow-lg dark:bg-black/20 rounded-lg py-2 px-4 flex flex-col gap-4">
-            @foreach ($post->comments as $comment)
-                @include('posts.comments.comment', ['comment' => $comment])
-            @endforeach
-        </div>
+        @if ($post->comments->count() > 0)
+            <div class="w-full bg-white shadow-lg dark:bg-black/20 rounded-lg py-2 px-4 flex flex-col gap-4">
+                @foreach ($post->comments as $comment)
+                    @include('posts.comments.comment', ['comment' => $comment])
+                @endforeach
+            </div>
+        @endif
     </div>
 </x-app-layout>
