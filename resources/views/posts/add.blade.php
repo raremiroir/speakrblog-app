@@ -35,9 +35,41 @@
                 {{ __('You are not allowed to create posts. Please log in or create an account.') }}
             </div>
         @else
+            <form method="post">
+                <div class="">
+                    <label for="new-tag">Add new tag:</label>
+                    <input type="text" name="new-tag" id="new-tag" class="form-control">
+                    <x-button size="sm" id="add-tag-btn">Add new tag</x-button>
+                </div>    
+            </form>
             <form method="POST" action="{{ route('posts.store') }}">
                 @csrf
-        
+
+                {{-- Tags --}}
+                <div class="">
+                    <div class="">
+                        <x-input-label for="tags" :value="__('Tags:')" />
+                        <select name="tags[]" id="tags" class="w-full" multiple>
+                            @foreach ($tags as $tag)
+                                <option value="{{ $tag->id }}" {{ in_array($tag->id, old('tags', [])) ? 'selected' : '' }}>
+                                    {{ $tag->name }}
+                                </option>
+                            @endforeach
+                            <small class="form-text text-muted">Select existing tags or add a new tag by typing it in and pressing "Enter".</small>
+                        </select>
+    
+                        {{-- <x-select id="category" name="category" required>
+                            <option value="">{{ __('Select a category') }}</option>
+                            @foreach ($categories as $category)
+                                <option value="{{ $category->id }}" {{ old('category') == $category->id ? 'selected' : '' }}>
+                                    {{ $category->name }}
+                                </option>
+                            @endforeach
+                        </x-select> --}}
+                    </div>
+                    
+                </div>
+
                 <div class="mb-4">
                     <x-input-label for="title" :value="__('Title')" />
                     <x-text-input 
@@ -64,3 +96,33 @@
         @endif
     </div>
 </x-app-layout>
+
+
+<script>
+    const tagSelect = document.getElementById('tags');
+    const newTagInput = document.getElementById('new-tag');
+    const addTagButton = document.getElementById('add-tag-btn');
+
+    newTagInput.addEventListener('keydown', event => {
+        if (event.key === 'Enter') {
+            event.preventDefault();
+            addTag();
+        }
+    });
+    addTagButton.addEventListener('click', addTag);
+
+
+    const addTag = () => {
+        const tagName = newTagInput.value.trim();
+
+        if (tagName !== '') {
+            const newOption = document.createElement('option');
+            newOption.value = '';
+            newOption.textContent = newTag;
+            tagSelect.appendChild(newOption);
+            tagsSelect.value = '';
+            tagsSelect.focus();
+            newTagInput.value = '';
+        }
+    }
+</script>
