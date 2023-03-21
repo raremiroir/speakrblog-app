@@ -39,7 +39,7 @@
                 <div class="">
                     <label for="new-tag">Add new tag:</label>
                     <input type="text" name="new-tag" id="new-tag" class="form-control">
-                    <x-button size="sm" id="add-tag-btn">Add new tag</x-button>
+                    <x-btn size="sm" id="add-tag-btn">Add new tag</x-btn>
                 </div>    
             </form>
             <form method="POST" action="{{ route('posts.store') }}">
@@ -88,9 +88,9 @@
                 </div>
         
                 <div class="flex items-center justify-end mt-4">
-                    <x-button type="submit" color="success" size="lg">
+                    <x-btn type="submit" color="success" size="lg">
                         {{ __('Speak!') }}
-                    </x-button>
+                    </x-btn>
                 </div>
             </form>
         @endif

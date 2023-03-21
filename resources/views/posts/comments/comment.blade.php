@@ -22,7 +22,7 @@
                     <form action="{{ route('posts.comments.destroy', [$post->id, $comment->id]) }}" method="POST">
                         @csrf
                         @method('DELETE')
-                        <x-button type="submit" color="error" size="xs" class="opacity-60 hover:opacity-100">Delete</x-button>
+                        <x-btn type="submit" color="error" size="xs" class="opacity-60 hover:opacity-100">Delete</x-btn>
                     </form>
                 @endif
             </div>

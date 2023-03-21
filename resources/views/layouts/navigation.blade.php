@@ -46,7 +46,7 @@
                 @auth
                     <x-dropdown align="right" width="48">
                         <x-slot name="trigger">
-                            <x-button color="primary" size="sm">
+                            <x-btn color="primary" size="sm">
                                 <div class="flex items-center gap-2 sm:gap-0 md:gap-2">
                                     <x-profile-avatar :user="Auth::user()" size="22" />
                                     <div class="sm:hidden md:flex">{{ Auth::user()->username }}</div>
@@ -57,7 +57,7 @@
                                         </svg>
                                     </div>
                                 </div>
-                            </x-button>
+                            </x-btn>
                         </x-slot>
 
                         <x-slot name="content">
@@ -91,12 +91,12 @@
                 <!-- Hamburger -->
                 <div class="-mr-2 flex items-center sm:hidden">
                     <div @click="open = ! open">
-                        <x-button color="default" size="xs" square>
+                        <x-btn color="default" size="xs" square>
                             <svg class="h-[22px] w-auto" stroke="currentColor" fill="none" viewBox="0 0 24 24">
                                 <path :class="{'hidden': open, 'inline-flex': ! open }" class="inline-flex" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16" />
                                 <path :class="{'hidden': ! open, 'inline-flex': open }" class="hidden" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
                             </svg>
-                        </x-button>
+                        </x-btn>
                     </div>
                 </div>
             </div>

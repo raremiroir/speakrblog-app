@@ -29,13 +29,13 @@
         
                 <div class="flex items-center justify-end mt-4 gap-4">
                     <a href={{ route('posts.show', $post->id) }}>
-                        <x-button color="error" size="lg" class="opacity-80">
+                        <x-btn color="error" size="lg" class="opacity-80">
                             {{ __('Cancel') }}
-                        </x-button>
+                        </x-btn>
                     </a>
-                    <x-button type="submit" color="success" size="lg">
+                    <x-btn type="submit" color="success" size="lg">
                         {{ __('Save Speak') }}
-                    </x-button>
+                    </x-btn>
                 </div>
             </form>
         @endif

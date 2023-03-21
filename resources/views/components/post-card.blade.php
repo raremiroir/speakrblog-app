@@ -70,48 +70,48 @@
                      <form action="{{ route('posts.unlike', $post->id) }}" method="POST">
                            @csrf
                            @method('DELETE')
-                           <x-button type="submit" size="sm" color="success">
+                           <x-btn type="submit" size="sm" color="success">
                               <i class="fas fa-heart"></i>
                               {{ $post->likes->count() }}
                               {{ Str::plural('like', $post->likes->count()) }}
-                        </x-button>
+                        </x-btn>
                      </form>
                   @else
                      <form action="{{ route('posts.like', $post->id) }}" method="POST">
                            @csrf
-                           <x-button type="submit" size="sm" color="primary">
+                           <x-btn type="submit" size="sm" color="primary">
                               <i class="far fa-heart"></i>
                               {{ $post->likes->count() }}
                               {{ Str::plural('like', $post->likes->count()) }}
-                           </x-button>
+                           </x-btn>
                      </form>
                   @endif
                @else
                   <a href="{{ route('login') }}" class="btn btn-primary btn-sm">
-                     <x-button color='default' size="sm">
+                     <x-btn color='default' size="sm">
                         <i class="far fa-heart"></i>
                         {{ $post->likes->count() }}
                         {{ Str::plural('like', $post->likes->count()) }}
-                     </x-button>
+                     </x-btn>
                   </a>
                @endauth
             </div>
             {{-- Comments --}}
             <div class="">
                <a href="{{ route('posts.show', $post->id) }}" class="btn btn-primary btn-sm">
-                  <x-button color="default" outlined size="sm">
+                  <x-btn color="default" outlined size="sm">
                      <i class="fas fa-comment-alt"></i>
                      {{ $post->comments->count() }}
                      {{ Str::plural('comment', $post->comments->count()) }}
-                  </x-button>
+                  </x-btn>
                </a>
             </div>
          </div>
          {{-- Read more --}}
          <div class="flex justify-end">
-            <x-button color="transp" size="sm" href="{{ route('posts.show', $post->id) }}">
+            <x-btn color="transp" size="sm" href="{{ route('posts.show', $post->id) }}">
                Read more <i class="fas fa-angle-double-right"></i>
-            </x-button>
+            </x-btn>
          </div>
     </div>
 </div>

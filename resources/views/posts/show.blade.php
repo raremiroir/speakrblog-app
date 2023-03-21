@@ -7,15 +7,15 @@
             <div class="flex flex-col gap-2 items-end">
                 @if (Auth::check() && ($post->user_id === Auth::user()->id))
                     <div class="flex gap-2 justify-end">
-                        <x-button color="info" size="xs" class="opacity-60 hover:opacity-80" href="{{ route('posts.edit', $post->id) }}">
+                        <x-btn color="info" size="xs" class="opacity-60 hover:opacity-80" href="{{ route('posts.edit', $post->id) }}">
                             <i class="fas fa-edit"></i> Edit
-                        </x-button>
+                        </x-btn>
                         <form method="POST" action="{{ route('posts.destroy', $post->id) }}" class="inline-block">
                             @csrf
                             @method('DELETE')
-                            <x-button type="submit" color="error" size="xs" class="opacity-40 hover:opacity-80">
+                            <x-btn type="submit" color="error" size="xs" class="opacity-40 hover:opacity-80">
                                 <i class="fas fa-trash"></i> Delete
-                            </x-button>
+                            </x-btn>
                         </form>
                     </div>
                     <hr class="w-full border-gray-400 dark:border-gray-600 "/>
@@ -61,7 +61,7 @@
                     @endif
                 </div>
                 <div class="flex justify-end">
-                    <x-button type="submit" color="success">Submit</x-button>
+                    <x-btn type="submit" color="success">Submit</x-btn>
                 </div>
             </form>
         </div>

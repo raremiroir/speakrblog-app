@@ -1,4 +1,4 @@
-<x-button 
+<x-btn 
    title="Switch theme"
    id="switch-theme-btn" 
    color="default"
@@ -10,7 +10,7 @@
          <i class="fas fa-sun"></i>
       @endif
    </div>
-</x-button>
+</x-btn>
 
 
 

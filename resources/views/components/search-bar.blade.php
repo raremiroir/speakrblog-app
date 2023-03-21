@@ -1,6 +1,6 @@
-<x-button id="search-toggle" square size="sm" title="Press CTRL+K to Search">
+<x-btn id="search-toggle" square size="sm" title="Press CTRL+K to Search">
    <i class="fas fa-search"></i>
-</x-button>
+</x-btn>
 
 <div 
    id="search-container"
@@ -16,9 +16,9 @@
    <form class="flex flex-col gap-2">
       <div class="flex flex-row justify-between items-center">
          <span class="text-xl font-title text-gray-700 dark:text-gray-300">Search</span>
-         <x-button size="xs" color="error" square id="close-search-btn" class="opacity-60 hover:opacity-100">
+         <x-btn size="xs" color="error" square id="close-search-btn" class="opacity-60 hover:opacity-100">
             <i class="fas fa-times"></i>
-         </x-button>
+         </x-btn>
       </div>
       <x-text-input 
          id="search-input"
