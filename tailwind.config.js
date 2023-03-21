@@ -1,15 +1,23 @@
 const defaultTheme = require('tailwindcss/defaultTheme');
 const pluginLineClamp = require('@tailwindcss/line-clamp');
 const pluginForms = require('@tailwindcss/forms');
+const pluginTypography = require('@tailwindcss/typography');
+const pluginAspectRatio = require('@tailwindcss/aspect-ratio');
+const wireUi = require('./vendor/wireui/wireui/tailwind.config.js')
 
 /** @type {import('tailwindcss').Config} */
 module.exports = {
+    presets: [ wireUi ],
+
     content: [
         './vendor/laravel/framework/src/Illuminate/Pagination/resources/views/*.blade.php',
         './storage/framework/views/*.php',
         './resources/views/**/*.blade.php',
+        './vendor/wireui/wireui/resources/**/*.blade.php',
+        './vendor/wireui/wireui/ts/**/*.ts',
+        './vendor/wireui/wireui/src/View/**/*.php'
     ],
-
+    
     theme: {
         extend: {
             colors: {
@@ -57,6 +65,6 @@ module.exports = {
         },
     },
 
-    plugins: [pluginLineClamp, pluginForms],
+    plugins: [pluginLineClamp, pluginForms, pluginTypography, pluginAspectRatio],
     darkMode: 'class',
 };
