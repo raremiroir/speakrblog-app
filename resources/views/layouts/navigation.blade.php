@@ -9,18 +9,32 @@
         <div class="flex justify-between h-16 items-center">
             <div class="flex">
                 <!-- Logo -->
-                <x-logo />
+                <a href="{{ route('posts.index') }}">
+                    <div class="hidden md:flex shrink-0 items-center justify-start gap-2">
+                        <x-application-logo class="block h-10 w-auto fill-current" />
+                            <div class="flex flex-col gap-0 items-start justify-center">
+                                <span class="text-success dark:text-success-l2 font-title text-xl">SPEAKR</span>
+                                <span class="text-gray-600 dark:text-success-l2/80 text-xs whitespace-nowrap">Speak your Mind</span>
+                        </div>
+                    </div>
+                    <div class="md:hidden">
+                        <x-application-logo class="block h-10 w-auto fill-current" />
+                    </div>
+                </a>
 
                 <!-- Navigation Links -->
                 <div class="hidden space-x-8 sm:space-x-4 md:space-x-8 sm:-my-px sm:ml-10 sm:flex">
                     <x-nav-link :href="route('posts.index')" :active="request()->routeIs('posts.index')">
-                        {{ __('All Speaks') }}
+                        {{ __('Speaks') }}
                     </x-nav-link>
                     <x-nav-link :href="route('posts.add')" :active="request()->routeIs('posts.add')">
                         {{ __('Speak your Mind') }}
                     </x-nav-link>
                     <x-nav-link :href="route('users.index')" :active="request()->routeIs('users.index')">
-                        {{ __('All Speakrs') }}
+                        {{ __('Speakrs') }}
+                    </x-nav-link>
+                    <x-nav-link :href="route('posts.tags.index')" :active="request()->routeIs('posts.tags.index')">
+                        {{ __('Tags') }}
                     </x-nav-link>
                 </div>
             </div>
@@ -94,13 +108,16 @@
     <div :class="{'block': open, 'hidden': ! open}" class="hidden sm:hidden">
         <div class="pt-2 pb-3 space-y-1">
             <x-responsive-nav-link :href="route('posts.index')" :active="request()->routeIs('posts.index')">
-                {{ __('All Speaks') }}
+                {{ __('Speaks') }}
             </x-responsive-nav-link>
             <x-responsive-nav-link :href="route('posts.add')" :active="request()->routeIs('posts.add')">
                 {{ __('Speak your Mind') }}
             </x-responsive-nav-link>
             <x-responsive-nav-link :href="route('users.index')" :active="request()->routeIs('users.index')">
-                {{ __('All Speakrs') }}
+                {{ __('Speakrs') }}
+            </x-responsive-nav-link>
+            <x-responsive-nav-link :href="route('posts.tags.index')" :active="request()->routeIs('posts.tags.index')">
+                {{ __('Tags') }}
             </x-responsive-nav-link>
         </div>
 
