@@ -11,11 +11,11 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::table('users', function (Blueprint $table) {
-            $table->id()->primary();                                // id
+        Schema::create('users', function (Blueprint $table) {
+            $table->id();                                           // id
             $table->string('username')->unique();                   // username
             $table->string('email')->unique();                      // email
-            $table->string('avatar')->nullable();                   // avatar
+            $table->string('avatar');                               // avatar
             $table->timestamp('email_verified_at')->nullable();     // is email verified
             $table->string('password');                             // password
             $table->boolean('is_admin')->default(false);            // is admin
