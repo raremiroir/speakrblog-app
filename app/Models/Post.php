@@ -38,7 +38,8 @@ class Post extends Model
     }
 
     public function tags() {
-        return $this->belongsToMany(Tag::class)->withTimestamps();
+        return $this->belongsToMany(Tag::class, 'post_has_tag', 'post_id', 'tag_id')
+            ->withPivot('name', 'color');
     }
 
     // Search function
@@ -49,5 +50,4 @@ class Post extends Model
             // })
             ->orWhere('body', 'LIKE', "%{$search}%");
     }
-    
 }
