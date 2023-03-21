@@ -17,28 +17,32 @@ class Comment extends Model
         // 'parent_id',
     ];
 
+    // Get the user that owns the comment.
     public function user()
     {
         return $this->belongsTo(User::class);
     }
-
+    // Get the post that owns the comment.
     public function post()
     {
         return $this->belongsTo(Post::class);
     }
+    // Get the parent comment that owns the comment.
+    public function parent()
+    {
+        return $this->belongsTo(Comment::class, 'parent_id');
+    }
+    // Get the child comments for the comment.
+    public function children()
+    {
+        return $this->hasMany(Comment::class, 'parent_id');
+    }
 
+    // Get the likes for the comment.
     public function likes()
     {
         return $this->belongsToMany(User::class, 'user_likes_comment')->withTimestamps();
     }
 
-    public function parent()
-    {
-        return $this->belongsTo(Comment::class, 'parent_id');
-    }
 
-    public function children()
-    {
-        return $this->hasMany(Comment::class, 'parent_id');
-    }
 }

@@ -53,11 +53,11 @@ Route::middleware(['auth'])->group(function () {
     Route::delete('/posts/{post}', [PostController::class, 'destroy'])->name('posts.destroy');
 
     // Comments routes
-    // Route::get('/posts/{post}/comments/create', [CommentController::class, 'create'])->name('comments.create');
-    // Route::post('/posts/{post}/comments', [CommentController::class, 'store'])->name('comments.store');
-    // Route::get('/comments/{comment}/edit', [CommentController::class, 'edit'])->name('comments.edit');
-    // Route::put('/comments/{comment}', [CommentController::class, 'update'])->name('comments.update');
-    // Route::delete('/comments/{comment}', [CommentController::class, 'destroy'])->name('comments.destroy');
+    Route::get('/posts/{post}/comments/create', [CommentController::class, 'create'])->name('posts.comments.create');
+    Route::post('/posts/{post}/comments', [CommentController::class, 'store'])->name('posts.comments.store');
+    Route::get('/posts/{post}/comments/{comment}/edit', [CommentController::class, 'edit'])->name('posts.comments.edit');
+    Route::put('/posts/{post}/comments/{comment}', [CommentController::class, 'update'])->name('posts.comments.update');
+    Route::delete('/posts/{post}/comments/{comment}', [CommentController::class, 'destroy'])->name('posts.comments.destroy');
 
     // Friendships routes
     // Route::get('/users/search', [FriendshipController::class, 'search'])->name('users.search');

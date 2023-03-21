@@ -31,9 +31,15 @@ class CommentController extends Controller
         $comment = new Comment();
         $comment->body = $request->input('body');
         $comment->user_id = Auth::id();
+
+        if ($request->has('parent_id')) {
+            $comment->parent_id = $request->input('parent_id');
+        }
+
         $post->comments()->save($comment);
 
-        return redirect()->route('posts.show', $post);
+        return redirect()->back();
+        // return redirect()->route('posts.show', $post);
     }
 
     // Display a single comment
@@ -66,6 +72,7 @@ class CommentController extends Controller
     {
         $comment->delete();
 
-        return redirect()->route('posts.show', $post);
+        return redirect()->back();
+        // return redirect()->route('posts.show', $post);
     }
 }
