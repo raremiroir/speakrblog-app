@@ -31,6 +31,8 @@ Route::get('/posts/tags/{tag}', [PostController::class, 'indexByTag'])->name('po
 // Users
 Route::get('/users', [ProfileController::class, 'index'])->name('users.index');
 Route::get('/users/{user}', [ProfileController::class, 'show'])->name('users.show');
+// Search
+Route::get('/search', [PostController::class, 'search'])->name('search');
 
 /* ========================
     Authenticated routes
