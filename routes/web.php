@@ -3,6 +3,7 @@
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\PostController;
 use App\Http\Controllers\CommentController;
+use App\Http\Controllers\TagController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -60,6 +61,16 @@ Route::middleware(['auth'])->group(function () {
     Route::get('/posts/{post}/comments/{comment}/edit', [CommentController::class, 'edit'])->name('posts.comments.edit');
     Route::put('/posts/{post}/comments/{comment}', [CommentController::class, 'update'])->name('posts.comments.update');
     Route::delete('/posts/{post}/comments/{comment}', [CommentController::class, 'destroy'])->name('posts.comments.destroy');
+
+    // Tag routes
+    Route::get('/tags', [TagController::class, 'index'])->name('posts.tags.index');
+    Route::get('/tags/{tag}', [TagController::class, 'show'])->name('posts.tags.show');
+    Route::get('/tags/add', [TagController::class, 'create'])->name('posts.tags.add');
+    Route::post('/tags', [TagController::class, 'store'])->name('posts.tags.store');
+    Route::get('/tags/{tag}/edit', [TagController::class, 'edit'])->name('posts.tags.edit');
+    Route::put('/tags/{tag}', [TagController::class, 'update'])->name('posts.tags.update');
+    Route::delete('/tags/{tag}', [TagController::class, 'destroy'])->name('posts.tags.destroy');
+
 
     // Friendships routes
     // Route::get('/users/search', [FriendshipController::class, 'search'])->name('users.search');
