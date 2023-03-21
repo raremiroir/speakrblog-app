@@ -61,48 +61,56 @@
 
    {{-- Card Footer --}}
    <div class="flex flex-row justify-between items-center">
-         {{-- Like --}}
-         <div class="col-md-6">
-            @auth
-               @if ($post->isLikedByUser(auth()->user()))
-                  <form action="{{ route('posts.unlike', $post->id) }}" method="POST">
-                        @csrf
-                        @method('DELETE')
-                        <x-button type="submit" size="sm" color="success"
-                        >
-                        <i class="fas fa-heart"></i>
-                        <span class="badge badge-pill badge-secondary">
-                           {{ $post->likes->count() }}
-                           {{ Str::plural('like', $post->likes->count()) }}
-                        </span>
-                     </x-button>
-                  </form>
+         {{-- Actions --}}
+         <div class="flex items-center justify-start gap-2">
+            {{-- Like --}}
+            <div class="col-md-6">
+               @auth
+                  @if ($post->isLikedByUser(auth()->user()))
+                     <form action="{{ route('posts.unlike', $post->id) }}" method="POST">
+                           @csrf
+                           @method('DELETE')
+                           <x-button type="submit" size="sm" color="success">
+                              <i class="fas fa-heart"></i>
+                              {{ $post->likes->count() }}
+                              {{ Str::plural('like', $post->likes->count()) }}
+                        </x-button>
+                     </form>
+                  @else
+                     <form action="{{ route('posts.like', $post->id) }}" method="POST">
+                           @csrf
+                           <x-button type="submit" size="sm" color="primary">
+                              <i class="far fa-heart"></i>
+                              {{ $post->likes->count() }}
+                              {{ Str::plural('like', $post->likes->count()) }}
+                           </x-button>
+                     </form>
+                  @endif
                @else
-                  <form action="{{ route('posts.like', $post->id) }}" method="POST">
-                        @csrf
-                        <x-button type="submit" size="sm" color="primary"
-                        >
+                  <a href="{{ route('login') }}" class="btn btn-primary btn-sm">
+                     <x-button color='default' size="sm">
                         <i class="far fa-heart"></i>
-                        <span class="badge badge-pill badge-secondary">
-                           {{ $post->likes->count() }}
-                           {{ Str::plural('like', $post->likes->count()) }}
-                        </span>
+                        {{ $post->likes->count() }}
+                        {{ Str::plural('like', $post->likes->count()) }}
                      </x-button>
-                  </form>
-               @endif
-            @else
-               <a href="{{ route('login') }}" class="btn btn-primary btn-sm">
-                  <span class="badge badge-pill badge-secondary">
-                     {{ $post->likes->count() }}
-                     {{ Str::plural('like', $post->likes->count()) }}
-                  </span>
+                  </a>
+               @endauth
+            </div>
+            {{-- Comments --}}
+            <div class="">
+               <a href="{{ route('posts.show', $post->id) }}" class="btn btn-primary btn-sm">
+                  <x-button color="default" outlined size="sm">
+                     <i class="fas fa-comment-alt"></i>
+                     {{ $post->comments->count() }}
+                     {{ Str::plural('comment', $post->comments->count()) }}
+                  </x-button>
                </a>
-            @endauth
+            </div>
          </div>
          {{-- Read more --}}
          <div class="flex justify-end">
             <x-button color="transp" size="sm" href="{{ route('posts.show', $post->id) }}">
-               Read more...
+               Read more <i class="fas fa-angle-double-right"></i>
             </x-button>
          </div>
     </div>
