@@ -6,7 +6,7 @@
    id="search-container"
    class="
       hidden
-      absolute top-full right-0 z-[100]
+      absolute top-full right-0 z-50 isolate
       bg-white dark:bg-gray-700 border-none
       w-full sm:w-[98%] md:w-4/5 lg:w-3/4 xl:w-1/2 py-4 px-8 rounded-2xl
       left-1/2 -translate-x-1/2
