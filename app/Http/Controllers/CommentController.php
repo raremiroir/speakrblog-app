@@ -39,7 +39,6 @@ class CommentController extends Controller
         $post->comments()->save($comment);
 
         return redirect()->back();
-        // return redirect()->route('posts.show', $post);
     }
 
     // Display a single comment
@@ -77,7 +76,7 @@ class CommentController extends Controller
     }
 
     // Like a comment
-    public function like(Comment $comment)
+    public function like(Post $post, Comment $comment)
     {
         auth()->user()->likedComments()->syncWithoutDetaching($comment->id);
         return back();
