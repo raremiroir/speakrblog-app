@@ -17,11 +17,9 @@
       "
    href="{{ route('users.show', $user->username) }}">
 
-   <img 
-      class="{{ $transition }} group-hover:contrast-125 mx-auto h-24 border-2 border-success dark:border-success-l1 group-hover:border-success-d1 dark:group-hover:border-success-l2 p-1 w-fit rounded-full" 
-      src="{{ $user->avatar }}" 
-      alt="Sunset in the mountains"
-   >
+   <div class="w-fit mx-auto">
+      @include('profile.avatar', ['user' => $user, 'size' => 96 ])
+   </div>
 
    <div class="flex flex-col items-center gap-1">
       <h5 class="{{ $active ? 'font-black' : 'font-bold'}} text-xl mb-2 text-success dark:text-success-l1 group-hover:text-success-d1 dark:group-hover:text-success-l2 {{ $transition }}">
@@ -30,31 +28,15 @@
       {{-- Info --}}
       <div class="">
          <div class="flex flex-row gap-1">
-            <x-button rounded md>
-               <div class="flex flex-col items-center gap-1 text-gray-700 dark:text-gray-300">
-                  <i class="fas fa-mail-bulk"></i>
-                  <span class="text-gray-500 whitespace-nowrap">
-                     {{ $user->posts->count() }}
-                     {{ Str::plural('speak', $user->posts->count()) }}
-                  </span>
-               </div>
-            </x-button>
-            <x-button rounded md>
-               <div class="flex flex-col items-center gap-1 text-gray-700 dark:text-gray-300">
-                  <i class="fas fa-comment-alt"></i>
-                  <span class="text-gray-500 whitespace-nowrap">
-                     {{ $user->comments->count() }}
-                     {{ Str::plural('comment', $user->comments->count()) }}
-                  </span>
-               </div>
-            </x-button>
-            {{-- <div class="flex items-center gap-1">
-               <x-icon name="followers" class="w-4 h-4" />
-               <span class="text-gray-500">{{ $user->followersCount }}</span> --}}
-            {{-- <div class="flex items-center gap-1">
-               <i class="fas fa-heart"></i>
-               <span class="text-gray-500">{{ $user->likesCount }}</span>
-            </div> --}}
+            {{-- Posts amount --}}
+            @include('profile.info.amt-posts', ['user' => $user])
+            {{-- Comments amount --}}
+            @include('profile.info.amt-comments', ['user' => $user])
+            {{-- Followers count --}}
+            {{-- Following count --}}
+            
+            {{-- Likes received count --}}
+            {{-- Likes given count --}}
          </div>
       </div>
    </div>
