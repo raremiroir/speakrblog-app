@@ -74,6 +74,7 @@ class PostController extends Controller
     // Update existing post in the database
     public function update(Request $request, Post $post) {
         $request->validate([
+            'tags' => 'array|nullable',
             'title' => 'required|max:255',
             'body' => 'required',
         ]);
@@ -82,8 +83,20 @@ class PostController extends Controller
         $post->body = $request->input('body');
         $post->save();
 
-        $post->tags()->sync($request->input('tags') ?: []);
-
+        // Remove all tags before assigning them again
+        $post->tags()->detach();
+        // Get tag id from unique name & assign to post
+        if (
+            count($request->input('tags')) > 0 
+            && strlen($request->input('tags')[0] > 1)
+        ) {
+            $selectedTags = explode('-', $request->input('tags')[0]) ?: [];
+            foreach ($selectedTags as $tag) {
+                $tag = trim($tag);
+                $tag = Tag::where('name', $tag)->first();
+                $post->tags()->attach($tag->id);
+            }
+        }
         return redirect()->route('posts.show', $post);
     }
 
