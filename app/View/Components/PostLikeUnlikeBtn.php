@@ -10,13 +10,15 @@ class PostLikeUnlikeBtn extends Component
 {
 
     public $post;
+    public $comment = null;
 
     /**
      * Create a new component instance.
      */
-    public function __construct($post)
+    public function __construct($post, $comment)
     {
         $this->post = $post;
+        $this->comment = $comment;
     }
 
     /**
