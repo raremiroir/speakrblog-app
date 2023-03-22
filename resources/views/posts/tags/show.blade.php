@@ -5,9 +5,6 @@
       </x-header>
    </x-slot>
 
-   <div class="flex flex-wrap gap-2 mx-auto w-4/5">
-      @foreach($posts as $post)
-         <x-post-card :post="$post" />
-      @endforeach
-   </div>
+
+   <x-posts-grid :posts="$posts"/>
 </x-app-layout>
