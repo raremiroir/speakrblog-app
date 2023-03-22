@@ -15,14 +15,22 @@
                 </p>
                 <p class="text-gray-800 dark:text-gray-200">{{ $comment->body }}</p>
             </div>
-            <div class="flex flex-row justify-end w-full">
+            <div class="flex flex-row justify-between w-full">
+                
+                @include('posts.comments.actions.btn-like', [
+                    'post' => $post,
+                    'comment' => $comment,
+                ])
+
                 @if (auth()->check() &&
                         (auth()->user()->isAdmin() ||
                             auth()->user()->id == $comment->user_id))
                     <form action="{{ route('posts.comments.destroy', [$post->id, $comment->id]) }}" method="POST">
                         @csrf
                         @method('DELETE')
-                        <x-btn type="submit" color="error" size="xs" class="opacity-60 hover:opacity-100">Delete</x-btn>
+                        <x-button type="submit" negative sm class="opacity-60 hover:opacity-100">
+                            <i class="fas fa-trash"></i> Delete
+                        </x-button>
                     </form>
                 @endif
             </div>
