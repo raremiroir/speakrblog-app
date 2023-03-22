@@ -4,6 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use App\Helpers\helpers;
 
 class Tag extends Model
 {
@@ -25,7 +26,7 @@ class Tag extends Model
         $tags = Tag::all();
         $tagsArray = [];
         foreach ($tags as $tag) {
-            $tagsArray[$tag->id] = $tag->name;
+            $tagsArray[$tag->name] = $tag->color;
         }
         return $tagsArray;
     }

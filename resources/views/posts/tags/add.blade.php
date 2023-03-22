@@ -17,9 +17,9 @@
          <div class="relative h-full whitespace-nowrap">
             <x-color-picker
                label="Pick a Color"
-               placeholder="Pick a Color"
-               color-name-as-value required
+               placeholder="Pick a Color" required
                name="color" id="color" 
+               hslColor="{{$hsl}}"
                :colors="[
                   [ 'name' => 'Green',      'value' => '#318748' ],
                   [ 'name' => 'Blue',       'value' => '#336699' ],

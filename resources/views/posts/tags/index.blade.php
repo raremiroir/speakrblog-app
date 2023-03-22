@@ -12,7 +12,10 @@
       <x-section title="All Tags">
           <div class="flex flex-row flex-wrap gap-2">
               @foreach($tags as $tag)
-                  <x-tag :tag="$tag" size="md" />
+               @include('posts.tags.tag', [
+                  'tag' => $tag, 
+                  'size' => 'md'
+                  ])
               @endforeach
           </div>
           </x-section>
@@ -21,7 +24,10 @@
    <x-section>
       <div class="flex flex-row flex-wrap gap-2">
          @foreach($tags as $tag)
-            <x-tag :tag="$tag" size="lg" />
+            @include('posts.tags.tag', [
+               'tag' => $tag, 
+               'size' => 'lg'
+               ])
          @endforeach
       </div>
    </x-section>
