@@ -13,8 +13,9 @@ class MultiSelect extends Component
     public $options;
     public $required;
     public $disabled;
+    public $selectedOptions = [];
 
-    public function __construct($name, $id, $label, $placeholder, $options, $required = false, $disabled = false)
+    public function __construct($name, $id, $label, $placeholder, $options, $required = false, $disabled = false, $selectedOptions = [])
     {
         $this->name = $name;
         $this->id = $id;
@@ -23,6 +24,7 @@ class MultiSelect extends Component
         $this->options = $options;
         $this->required = $required;
         $this->disabled = $disabled;
+        $this->selectedOptions = $selectedOptions;
     }
 
     public function render()

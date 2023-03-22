@@ -1,4 +1,20 @@
-<div x-data="{ open: false, selectedOptions: [], selectedLabels: [] }" x-cloak>
+@props([
+    'id' => '',
+    'name' => '',
+    'label' => '',
+    'placeholder' => '',
+    'options' => [],
+    'required' => false,
+    'disabled' => false,
+    'selectedOptions' => [],
+])
+
+@php
+    $selectedOptions = $selectedOptions ? json_encode($selectedOptions) : '[]';
+    var_dump($selectedOptions);
+@endphp
+
+<div x-data="{ open: false, selectedOptions: {{ $selectedOptions }} }" x-cloak>
     <div class="relative">
         <label for="{{ $id }}" 
             class="block text-sm font-medium leading-5 text-gray-600 dark:text-gray-400 mb-1">
@@ -24,7 +40,7 @@
                 x-bind:placeholder="selectedOptions.length ? '' : '{{ $placeholder }}'"
                 x-bind:value="selectedOptions"
                 x-value="selectedOptions"
-                x-model="selectedLabels.join('  -  ')"
+                x-model="selectedOptions.join('  -  ')"
                 class="
                     block w-full 
                     py-2 pl-3 pr-10 
@@ -57,22 +73,20 @@
                 flex flex-row flex-wrap gap-2" 
         >
             @foreach ($options as $value => $label)
-                <label class="
+                <label 
+                    style="background-color: {{ $label }}"
+                    class="
                         inline-flex items-center rounded-lg p-2
-                        text-gray-800 dark:text-gray-200
-                        bg-gray-300 dark:bg-gray-700">
+                        text-gray-200 dark:text-gray-800">
                     <input type="checkbox" value="{{ $value }}"
                         class="form-checkbox h-5 w-5 text-success rounded-md transition duration-150 ease-in-out focus:ring-success"
                         x-on:click="
                             selectedOptions.includes('{{ $value }}') 
                                 ? selectedOptions = selectedOptions.filter(item => item !== '{{ $value }}') 
                                 : selectedOptions = [...selectedOptions, '{{ $value }}'];
-                            selectedLabels.includes('{{ $label }}') 
-                                ? selectedLabels = selectedLabels.filter(item => item !== '{{ $label }}') 
-                                : selectedLabels = [...selectedLabels, '{{ $label }}'];
                         "
-                        x-bind:checked="selectedOptions.includes('{{ $value }}'); selectedLabels.includes('{{ $label }}')">
-                    <span class="ml-2 text-sm leading-5">{{ $label }}</span>
+                        x-bind:checked="selectedOptions.includes('{{ $value }}');">
+                    <span class="ml-2 text-sm leading-5 font-semibold dark:font-bold">{{ $value }}</span>
                 </label>
             @endforeach
         </div>
