@@ -1,9 +1,19 @@
 <x-app-layout>
     <x-slot name="header">
         <div class="w-4/5 mx-auto flex items-center justify-between"> 
-            <x-header>
-                {{ $post->title }}
-            </x-header>
+            <div class="flex flex-col items-start gap-2">
+                {{-- Title --}}
+                <x-header>
+                    {{ $post->title }}
+                </x-header>
+                {{-- Tags --}}
+                <div class="flex flex-wrap gap-2 pl-4">
+                    @foreach ($post->tags as $tag)
+                        <x-tag :tag="$tag" />
+                    @endforeach
+                </div>
+            </div>
+
             <div class="flex flex-col gap-2 items-end">
                 @if (Auth::check() && ($post->user_id === Auth::user()->id))
                     <div class="flex gap-2 justify-end">

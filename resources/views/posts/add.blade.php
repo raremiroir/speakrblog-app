@@ -52,10 +52,10 @@
                 <div class="">
                     @include('components.multi-select', 
                     [
-                        'name' => 'my-multi-select',
-                        'id' => 'my-multi-select',
-                        'label' => 'My Multi-Select',
-                        'placeholder' => 'Select options...',
+                        'name' => 'tags',
+                        'id' => 'tags',
+                        'label' => 'Select Tags',
+                        'placeholder' => 'Select Tags...',
                         'options' => App\Models\Tag::getTagsAsArray(),
                         'required' => true,
                         'disabled' => false,

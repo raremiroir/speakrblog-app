@@ -37,17 +37,26 @@ class Post extends Model
         return $this->likes()->where('user_id', auth()->id())->exists();
     }
 
+    // Get the tags for the post.
     public function tags() {
-        return $this->belongsToMany(Tag::class, 'post_has_tag', 'post_id', 'tag_id')
-            ->withPivot('name', 'color');
+        return $this->belongsToMany(Tag::class, 'post_has_tag', 'post_id', 'tag_id');
     }
 
     // Search function
     public function scopeSearch($query, $search) {
         return $query->where('title', 'LIKE', "%{$search}%")
-            // ->orWhereHas('tags', function($query) use ($search) {
-            //     $query->where('name', 'LIKE', "%{$search}%");
-            // })
+            ->orWhereHas('tags', function($query) use ($search) {
+                $query->where('name', 'LIKE', "%{$search}%");
+            })
             ->orWhere('body', 'LIKE', "%{$search}%");
+    }
+
+    // Assign tags to post
+    public function assignTags(array $tags) {
+        $this->tags()->detach();
+        foreach ($tags as $tag) {
+            $tag = Tag::firstOrCreate(['name' => $tag]);
+            // $this->tags()->attach($tag->id, ['name' => $tag->name, 'color' => $tag->color]);
+        }
     }
 }

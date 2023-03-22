@@ -27,19 +27,32 @@ class PostController extends Controller
 
     // Store a new post in the database
     public function store(Request $request) {
+        // Validate the request data
         $request->validate([
+            'tags' => 'array|nullable',
             'title' => 'required|max:255',
             'body' => 'required',
         ]);
 
+        // Create a new post
         $post = new Post();
+        // Assign the required request data to the post
         $post->title = $request->input('title');
         $post->body = $request->input('body');
+        // Assign the authenticated user to the post
         $post->user_id = Auth::id();
+        // Save the post
         $post->save();
-
-        $post->tags()->sync($request->input('tags') ?: []);
-
+        
+        // Get tag id from unique name & assign to post
+        if (count($request->input('tags')) > 0) {
+            $selectedTags = explode('-', $request->input('tags')[0]) ?: [];
+            foreach ($selectedTags as $tag) {
+                $tag = trim($tag);
+                $tag = Tag::where('name', $tag)->first();
+                $post->tags()->attach($tag->id);
+            }
+        }
         return redirect()->route('posts.show', $post);
     }
 
@@ -97,6 +110,17 @@ class PostController extends Controller
         $posts = Post::search($search)->get();
         $users = User::search($search)->get();
         return view('search', compact('posts', 'users', 'search'));
+    }
+
+    // Add tags to a post
+    public function addTags(Request $request, Post $post) {
+        $request->validate([
+            'tags' => 'array|nullable',
+        ]);
+
+        $post->assignTags($request->input('tags') ?: []);
+
+        return redirect()->route('posts.show', $post);
     }
 
     // Display posts by a specific user

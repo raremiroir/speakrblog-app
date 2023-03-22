@@ -14,10 +14,10 @@ class Tag extends Model
         'color',
     ];
 
+
     // Get posts for the tag.
     public function posts() {
-        return $this->belongsToMany(Post::class, 'post_has_tag', 'tag_id', 'post_id')
-            ->withPivot('title', 'body');
+        return $this->belongsToMany(Post::class, 'post_has_tag', 'tag_id', 'post_id');
     }
 
     // Return all tags as array with id as key and name as value

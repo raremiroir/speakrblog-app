@@ -15,7 +15,7 @@ class TagController extends Controller
 
     // Display a single tag with all posts that have that tag
     public function show(Tag $tag) {
-        $posts = $tag->posts()->with('user')->latest()->paginate(20);
+        $posts = $tag->posts()->latest()->paginate(20);
         return view('posts.tags.show', compact('tag', 'posts'));
     }
 

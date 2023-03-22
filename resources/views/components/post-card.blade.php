@@ -21,24 +21,32 @@
       w-full rounded-2xl
       ">
 
-      {{-- Card Header --}}
-   <div class="flex flex-col lg:flex-row justify-between gap-2 items-start lg:items-center">
-      {{-- Title --}}
-      <h5 class="order-last lg:order-first text-2xl font-title text-success border-b-2 border-success/40">{{ $post->title }}</h5>
-      {{-- Authored by --}}
-      <div class="order-first lg:order-last text-xs text-gray-400 dark:text-gray-500 whitespace-nowrap flex items-center">
-         <a 
-            href="{{ route('users.show', $post->user->username) }}" 
-            class="text-success-d2/50 dark:text-success-l2/50 hover:text-success-d2 dark:hover:text-success-l2 font-bold hover:underline {{ $transition }} flex gap-2 items-center"
-            >
-               <x-profile-avatar :user="$post->user" />
-               Spoken by {{ $post->user->username }}
-         </a>&nbsp;on&nbsp;<span class="font-semibold">{{ $post->created_at->format('d/m/Y') }}</span>
+   {{-- Card Header --}}
+   <div class="flex flex-col items-start gap-2 w-full">
+      {{-- Tags --}}
+      <div class="flex flex-wrap gap-2">
+         @foreach ($post->tags as $tag)
+             <x-tag :tag="$tag" />
+         @endforeach
       </div>
-      {{-- Deleted --}}
-      @if ($post->trashed())
-         <span class="float-right badge badge-danger">Deleted</span>
-      @endif
+      <div class="flex flex-col w-full md:flex-row justify-between gap-2 items-start lg:items-center">
+         {{-- Title --}}
+         <h5 class="order-last md:order-first text-2xl font-title text-success border-b-2 border-success/40">{{ $post->title }}</h5>
+         {{-- Authored by --}}
+         <div class="order-first md:order-last text-xs text-gray-400 dark:text-gray-500 whitespace-nowrap flex items-center">
+            <a 
+               href="{{ route('users.show', $post->user->username) }}" 
+               class="text-success-d2/50 dark:text-success-l2/50 hover:text-success-d2 dark:hover:text-success-l2 font-bold hover:underline {{ $transition }} flex gap-2 items-center"
+               >
+                  <x-profile-avatar :user="$post->user" />
+                  Spoken by {{ $post->user->username }}
+            </a>&nbsp;on&nbsp;<span class="font-semibold">{{ $post->created_at->format('d/m/Y') }}</span>
+         </div>
+         {{-- Deleted --}}
+         @if ($post->trashed())
+            <span class="float-right badge badge-danger">Deleted</span>
+         @endif
+      </div>
    </div>
 
    {{-- Card Body --}}
@@ -49,14 +57,6 @@
       {{-- @if ($post->image)
          <img src="{{ asset('storage/' . $post->image) }}" class="img-fluid mb-3" alt="Post image">
       @endif --}}
-      {{-- Tags --}}
-      {{-- <p class="card-text">
-         <small class="text-muted">
-            @foreach ($post->tags as $tag)
-               <a href="{{ route('posts.index', ['tag' => $tag->name]) }}">#{{ $tag->name }}</a>
-            @endforeach
-         </small>
-      </p> --}}
    </div>
 
    {{-- Card Footer --}}
