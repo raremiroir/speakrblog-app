@@ -42,6 +42,11 @@ class Post extends Model
         return $this->belongsToMany(Tag::class, 'post_has_tag', 'post_id', 'tag_id');
     }
 
+    // Get author of the post
+    public function author() {
+        return $this->belongsTo(User::class, 'user_id');
+    }
+
     // Search function
     public function scopeSearch($query, $search) {
         return $query->where('title', 'LIKE', "%{$search}%")
