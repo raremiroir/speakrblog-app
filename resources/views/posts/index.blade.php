@@ -11,5 +11,5 @@
         </x-header>
     </x-slot>
 
-    <x-posts-grid :posts="$posts"/>
+    @include('posts.grid', ['posts' => $posts])
 </x-app-layout>

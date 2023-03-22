@@ -35,54 +35,70 @@
         </x-header>
     </x-slot>
 
-    {{-- Content --}}
-    <div class="max-w-5xl mx-auto p-4 sm:p-6 lg:p-8">
-        @if (!Auth::check())
-            <div class="bg-gray-100 dark:bg-gray-800 p-4 rounded-md">
-                You are not allowed to create posts. Please log in or create an account.
-            </div>
-        @else
-            {{-- Add Tag Form --}}
+    <x-page hasAside asideTitle="Add a Tag">
 
-            {{-- Add Post Form --}}
-            <form method="POST" action="{{ route('posts.store') }}" class="z-0 isolate">
-                @csrf
-
-                {{-- Select Tag --}}
-                <div class="">
-                    @include('components.multi-select', 
-                    [
-                        'name' => 'tags',
-                        'id' => 'tags',
-                        'label' => 'Select Tags',
-                        'placeholder' => 'Select Tags...',
-                        'options' => App\Models\Tag::getTagsAsArray(),
-                        'required' => true,
-                        'disabled' => false,
-                    ])
+        <x-slot name="aside">
+            @include('posts.tags.add')
+            <x-section title="All Tags">
+                <div class="flex flex-row flex-wrap gap-2">
+                   @foreach($tags as $tag)
+                      <x-tag :tag="$tag" size="md" />
+                   @endforeach
                 </div>
-
-                {{-- Title --}}
-                <div class="mb-4">
-                    <x-input label="Title" type="text" name="title" id="title" placeholder='An appealing title'
-                        required autofocus />
+             </x-section>
+        </x-slot>
+        
+        {{-- Content --}}
+        <x-section title="Add a new post!">
+            @if (!Auth::check())
+                <div class="bg-gray-100 dark:bg-gray-800 p-4 rounded-md">
+                    You are not allowed to create posts. Please log in or create an account.
                 </div>
+            @else
+                {{-- Add Tag Form --}}
+    
+                {{-- Add Post Form --}}
+                <form method="POST" action="{{ route('posts.store') }}" class="z-0 isolate">
+                    @csrf
+    
+                    {{-- Select Tag --}}
+                    <div class="">
+                        @include('components.multi-select', 
+                        [
+                            'name' => 'tags',
+                            'id' => 'tags',
+                            'label' => 'Select Tags',
+                            'placeholder' => 'Select Tags...',
+                            'options' => App\Models\Tag::getTagsAsArray(),
+                            'required' => true,
+                            'disabled' => false,
+                        ])
+                    </div>
+                    <hr class="border-gray-300 dark:border-gray-700 w-3/4 mx-auto mt-16 mb-8"/>
+    
+                    {{-- Title --}}
+                    <div class="mb-4">
+                        <x-input label="Title" type="text" name="title" id="title" placeholder='An appealing title'
+                            required autofocus />
+                    </div>
+    
+                    <div class="mb-4">
+                        <x-textarea label="Post Content" type="text" name="body" id="body"
+                            placeholder="{{ $placeholders[$random_key] }}" required autofocus rows="10">
+                            {{ old('body') }}
+                        </x-textarea>
+                    </div>
+    
+                    <div class="flex items-center justify-end mt-4">
+                        <x-btn type="submit" color="success" size="lg">
+                            Speak!
+                        </x-btn>
+                    </div>
+                </form>
+            @endif
+        </x-section>
+    </x-page>
 
-                <div class="mb-4">
-                    <x-textarea label="Post Content" type="text" name="body" id="body"
-                        placeholder="{{ $placeholders[$random_key] }}" required autofocus rows="10">
-                        {{ old('body') }}
-                    </x-textarea>
-                </div>
-
-                <div class="flex items-center justify-end mt-4">
-                    <x-btn type="submit" color="success" size="lg">
-                        Speak!
-                    </x-btn>
-                </div>
-            </form>
-        @endif
-    </div>
 </x-app-layout>
 
 
