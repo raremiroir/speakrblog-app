@@ -7,7 +7,7 @@
    <ul class="w-full">
       @if ($posts->count() > 0)
          @foreach ($posts as $post)
-            <x-post-card :post="$post" />
+            @include('posts.card', ['post' => $post])
          @endforeach
       @else
          <li class="text-gray-400 dark:text-gray-500">No posts found</li>
