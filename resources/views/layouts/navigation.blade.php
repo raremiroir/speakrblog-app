@@ -49,7 +49,7 @@
                 <x-search-bar />
                 <!-- Profile Dropdown (only show when logged in) -->
                 @auth
-                    <x-profile-dropdown />
+                    @include('profile.dropdown-options')
                 @else
                     <x-login-register-btn/>
                 @endauth

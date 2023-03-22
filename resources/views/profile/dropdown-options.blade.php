@@ -17,14 +17,14 @@
    <x-dropdown.header label="{{ Auth::user()->username }}'s Account">
        <div class="h-fit">
            <x-button flat sm full href="{{ route('users.show', Auth::user()->username) }}">
-               <div class="w-full flex justify-start px-4 gap-2">
+               <div class="w-full flex justify-start px-1 gap-2">
                    <i class="fas fa-user-circle"></i> My Profile
                </div>
            </x-button>
        </div>
        <div class="h-fit">
            <x-button info flat sm full href="{{ route('profile.edit') }}">
-               <div class="w-full flex justify-start px-4 gap-2">
+               <div class="w-full flex justify-start px-1 gap-2">
                    <i class="fas fa-user-cog"></i> Account Settings
                </div>
            </x-button>
@@ -36,7 +36,7 @@
                @csrf
 
                <x-button type="submit" negative sm flat full onclick="event.preventDefault(); this.closest('form').submit();">
-                   <div class="w-full flex justify-start px-4 gap-2 text-error dark:text-error-l1 font-regular opacity-80">
+                   <div class="w-full flex justify- px-1 gap-2 text-error dark:text-error-l1 font-regular opacity-80">
                        <i class="fas fa-sign-out-alt"></i> Log Out
                     </div>
                </x-button>
