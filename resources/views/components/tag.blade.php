@@ -20,8 +20,13 @@
 @endphp
 
 <a href="{{ route('posts.tags.show', $tag) }}" 
-   class="tag text-clip font-semibold tracking-wide rounded-lg {{ $class }}"
+   class="
+      tag transition-all duration-200 ease-in-out
+      text-gray-100 dark:text-gray-900 
+      font-semibold dark:font-bold 
+      tracking-wide rounded-lg {{ $class }}"
    style="background: {{ $tag->color }} !important;"
+   title="View posts related to '{{ $tag->name }}'"
    >
    {{ $tag->name }}
 </a>
