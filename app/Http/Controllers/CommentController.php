@@ -75,4 +75,17 @@ class CommentController extends Controller
         return redirect()->back();
         // return redirect()->route('posts.show', $post);
     }
+
+    // Like a comment
+    public function like(Comment $comment)
+    {
+        auth()->user()->likedComments()->syncWithoutDetaching($comment->id);
+        return back();
+    }
+    // Unlike a comment
+    public function unlike(Post $post, Comment $comment)
+    {
+        auth()->user()->likedComments()->detach($comment->id);
+        return back();
+    }
 }
