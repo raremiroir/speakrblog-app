@@ -36,7 +36,7 @@ class TagController extends Controller
             'color' => $request->input('color'),
         ]);
 
-        return redirect()->route('posts.tags.index', $tag);
+        return redirect()->back();
     }
 
     // Display form to edit existing tag
