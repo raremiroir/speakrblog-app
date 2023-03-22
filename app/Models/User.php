@@ -68,4 +68,10 @@ class User extends Authenticatable
     public function scopeSearch($query, $search) {
         return $query->where('username', 'LIKE', "%{$search}%");
     }
+
+    // Get comments the user has made
+    public function comments() {
+        return $this->hasMany(Comment::class);
+    }
+
 }
