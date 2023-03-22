@@ -7,9 +7,12 @@
     <!-- Primary Navigation Menu -->
     <div class="w-full sm:w-[98%] md:w-[95%] lg:w-5/6 xl:w-4/5 mx-auto px-4 sm:px-6 lg:px-8">
         <div class="flex justify-between h-16 items-center">
+
+            {{-- DESKTOP MENU --}}
             <div class="flex">
-                <!-- Logo -->
-                <a href="{{ route('posts.index') }}">
+
+                <!-- Branding -->
+                <x-btn size="sm" color="transp" href="{{ route('posts.index') }}">
                     <div class="hidden md:flex shrink-0 items-center justify-start gap-2">
                         <x-application-logo class="block h-10 w-auto fill-current" />
                             <div class="flex flex-col gap-0 items-start justify-center">
@@ -20,7 +23,7 @@
                     <div class="md:hidden">
                         <x-application-logo class="block h-10 w-auto fill-current" />
                     </div>
-                </a>
+                </x-btn>
 
                 <!-- Navigation Links -->
                 <div class="hidden space-x-8 sm:space-x-4 md:space-x-8 sm:-my-px sm:ml-10 sm:flex">
@@ -37,65 +40,22 @@
                         Tags
                     </x-nav-link>
                 </div>
+
             </div>
 
+            {{-- Extra (Options - Settings - ...) --}}
             <div class="flex gap-2 sm:gap-1 md:gap-2 items-center">
                 {{-- Search bar --}}
                 <x-search-bar />
-                <!-- Settings Dropdown (only show when logged in) -->
+                <!-- Profile Dropdown (only show when logged in) -->
                 @auth
-                    <x-dropdown>
-                        <x-slot name="trigger">
-                            <x-button secondary>
-                                <div class="flex items-center gap-2 sm:gap-0 md:gap-2">
-                                    <x-profile-avatar :user="Auth::user()" size="22" />
-                                    <div class="sm:hidden md:flex">{{ Auth::user()->username }}</div>
-        
-                                    <div class="ml-1">
-                                        <svg class="fill-current h-4 w-auto" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20">
-                                            <path fill-rule="evenodd" d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z" clip-rule="evenodd" />
-                                        </svg>
-                                    </div>
-                                </div>
-                            </x-button>
-                        </x-slot>
-
-                        <x-dropdown.header label="{{ Auth::user()->username }}'s Account">
-                            <div class="h-fit">
-                                <x-button flat sm full href="{{ route('users.show', Auth::user()->username) }}">
-                                    <div class="w-full flex justify-start px-4 gap-2">
-                                        <i class="fas fa-user-circle"></i> My Profile
-                                    </div>
-                                </x-button>
-                            </div>
-                            <div class="h-fit">
-                                <x-button info flat sm full href="{{ route('profile.edit') }}">
-                                    <div class="w-full flex justify-start px-4 gap-2">
-                                        <i class="fas fa-user-cog"></i> Account Settings
-                                    </div>
-                                </x-button>
-                            </div>
-                            <hr class="border-gray-400 dark:border-gray-600 my-1" />
-                            <!-- Authentication -->
-                            <div class="h-fit">
-                                <form method="POST" action="{{ route('logout') }}" class="w-full h-fit">
-                                    @csrf
-
-                                    <x-button type="submit" negative sm flat full onclick="event.preventDefault(); this.closest('form').submit();">
-                                        <div class="w-full flex justify-start px-4 gap-2 text-error dark:text-error-l1 font-regular opacity-80">
-                                            <i class="fas fa-sign-out-alt"></i> Log Out
-                                         </div>
-                                    </x-button>
-                                </form>
-                            </div>
-                        </x-dropdown.header>
-                    </x-dropdown>
+                    <x-profile-dropdown />
                 @else
                     <x-login-register-btn/>
                 @endauth
         
                 {{-- DarkMode --}}
-                <x-theme-switcher />
+                <livewire:toggle-dark-mode/>
 
                 <!-- Hamburger -->
                 <div class="-mr-2 flex items-center sm:hidden">
@@ -117,16 +77,16 @@
     <div :class="{'block': open, 'hidden': ! open}" class="hidden sm:hidden">
         <div class="pt-2 pb-3 space-y-1">
             <x-responsive-nav-link :href="route('posts.index')" :active="request()->routeIs('posts.index')">
-                {{ __('Speaks') }}
+                Speaks
             </x-responsive-nav-link>
             <x-responsive-nav-link :href="route('posts.add')" :active="request()->routeIs('posts.add')">
-                {{ __('Speak your Mind') }}
+                Speak your Mind
             </x-responsive-nav-link>
             <x-responsive-nav-link :href="route('users.index')" :active="request()->routeIs('users.index')">
-                {{ __('Speakrs') }}
+                Speakrs
             </x-responsive-nav-link>
             <x-responsive-nav-link :href="route('posts.tags.index')" :active="request()->routeIs('posts.tags.index')">
-                {{ __('Tags') }}
+                Tags
             </x-responsive-nav-link>
         </div>
 
@@ -140,11 +100,11 @@
 
             <div class="mt-3 space-y-1">
                 <x-responsive-nav-link :href="route('users.show', Auth::user()->username)">
-                    <i class="fas fa-user-circle"></i> {{ __('My Profile') }}
+                    <i class="fas fa-user-circle"></i> My Profile
                 </x-responsive-nav-link>
 
                 <x-responsive-nav-link :href="route('profile.edit')">
-                    <i class="fas fa-user-cog"></i> {{ __('Account Settings') }}
+                    <i class="fas fa-user-cog"></i> Account Settings
                 </x-responsive-nav-link>
 
                 <!-- Authentication -->
@@ -154,9 +114,12 @@
                     <x-responsive-nav-link :href="route('logout')"
                             onclick="event.preventDefault();
                                         this.closest('form').submit();">
-                        <i class="fas fa-sign-out-alt"></i> {{ __('Log Out') }}
+                        <i class="fas fa-sign-out-alt"></i> Log Out
                     </x-responsive-nav-link>
                 </form>
+
+                {{-- DarkMode --}}
+                <livewire:toggle-dark-mode/>
             </div>
         </div>
         @endauth
