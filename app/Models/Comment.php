@@ -39,8 +39,7 @@ class Comment extends Model
     }
 
     // Get the likes for the comment.
-    public function likes()
-    {
+    public function likes() {
         return $this->belongsToMany(User::class, 'user_likes_comment')->withTimestamps();
     }
 

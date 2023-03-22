@@ -55,6 +55,7 @@ class User extends Authenticatable
         return $this->hasMany(Post::class);
     }
 
+    // Get the likes for the user on posts.
     public function likedPosts() {
         return $this->belongsToMany(Post::class, 'user_likes_post')->withTimestamps();
     }
@@ -72,6 +73,10 @@ class User extends Authenticatable
     // Get comments the user has made
     public function comments() {
         return $this->hasMany(Comment::class);
+    }
+    // Get likes the user has made on comments
+    public function likedComments() {
+        return $this->belongsToMany(Comment::class, 'user_likes_comment')->withTimestamps();
     }
 
 }
