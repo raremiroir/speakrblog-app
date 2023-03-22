@@ -1,5 +1,7 @@
 <x-btn id="search-toggle" square size="sm" title="Press CTRL+K to Search">
-   <i class="fas fa-search"></i>
+   <div class="py-0.5">
+      <i class="fas fa-search"></i>
+   </div>
 </x-btn>
 
 <div 
