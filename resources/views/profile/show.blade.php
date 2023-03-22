@@ -8,9 +8,15 @@
       <div class="flex items-center justify-between w-full mx-auto">
          <div class="flex flex-row gap-4 items-center">
             <x-profile-avatar :user="$user" size="64" />
+            <div class="flex flex-col gap-2">
             <x-header>
-               <span class="whitespace-nowrap">{{ $user->username }}'s Profile</span>
-            </x-header>
+                  <span class="whitespace-nowrap">{{ $user->username }}'s Profile</span>
+               </x-header>
+               <div class="">
+                  @include('profile.info.amt-posts', ['user' => $user, 'extend' => true])
+                  @include('profile.info.amt-comments', ['user' => $user, 'extend' => true])
+               </div>
+            </div>
          </div>
          <div class="flex w-fit whitespace-nowrap">
             <small class="font-medium text-gray-600 dark:text-gray-400">Member since {{ $joined_on }}</small>
