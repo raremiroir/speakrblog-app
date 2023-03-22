@@ -12,7 +12,7 @@
                </x-button>
          </form>
       @else
-         <form action="{{ route('posts.like', $post->id) }}" method="POST" class="opacity-80 hover:opacity-100 {{ $transition }}">
+         <form action="{{ route('posts.like', $post->id) }}" method="POST" class="opacity-80 hover:opacity-100 transition-all duration-200 ease-in-out">
                @csrf
                <x-button type="submit" primary sm>
                   <i class="far fa-heart"></i>
