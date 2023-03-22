@@ -60,6 +60,8 @@ Route::middleware(['auth'])->group(function () {
     Route::post('/posts/{post}/comments', [CommentController::class, 'store'])->name('posts.comments.store');
     Route::get('/posts/{post}/comments/{comment}/edit', [CommentController::class, 'edit'])->name('posts.comments.edit');
     Route::put('/posts/{post}/comments/{comment}', [CommentController::class, 'update'])->name('posts.comments.update');
+    Route::post('/posts/{post}/comments/{comment}/like', [CommentController::class, 'like'])->name('posts.comments.like');
+    Route::delete('/posts/{post}/comments/{comment}/unlike', [CommentController::class, 'unlike'])->name('posts.comments.unlike');
     Route::delete('/posts/{post}/comments/{comment}', [CommentController::class, 'destroy'])->name('posts.comments.destroy');
 
     // Tag routes
