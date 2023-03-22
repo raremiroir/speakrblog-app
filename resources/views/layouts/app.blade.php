@@ -1,3 +1,12 @@
+@props([
+    'hasAside' => false,
+    'asideTitle' => '',
+])
+
+@php
+    $widthClass = 'w-11/12 md:w-5/6 lg:w-4/5 xl:w-3/4';
+@endphp
+
 <!DOCTYPE html>
 <html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
     <head>
@@ -30,16 +39,29 @@
             <!-- Page Heading -->
             @if (isset($header))
                 <header class="bg-white dark:bg-gray-800 shadow">
-                    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-24 pb-8">
+                    <div class="{{ $widthClass }} px-16 xl:px-16 flex mx-auto justify-between items-center pt-24 pb-8">
                         {{ $header }}
                     </div>
                 </header>
             @endif
 
-            <!-- Page Content -->
-            <main>
-                {{ $slot }}
-            </main>
+            {{-- Page wrapper --}}
+            <div class="{{ $widthClass }} mx-auto grid grid-cols-3 grid-rows-none">
+
+                {{-- Main --}}
+                <main class="{{ $hasAside ? 'col-span-2' : 'col-span-3' }} w-full p-8">
+                    {{ $slot }}
+                </main>
+                
+                {{-- Aside --}}
+                @if ($hasAside)
+                    <aside class="col-span-1 p-8 bg-gray-100 dark:bg-gray-900 border-l-4 border-gray-200 dark:border-gray-800 h-screen">
+                        <h2 class="font-title text-2xl text-gray-700 dark:text-gray-300 mb-4 border-b border-gray-700/60 dark:border-gray-300/60 w-fit">{{ $asideTitle }}</h2>
+                        {{ $aside }}
+                    </aside>
+                @endif
+
+            </div>
         </div>
         <script>
             const searchToggle = document.getElementById('search-toggle');
