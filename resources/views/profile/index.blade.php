@@ -14,7 +14,7 @@
     <x-section>
        <div class="flex flex-row flex-wrap gap-4">
             @foreach($users as $currUser)
-                <x-user-card :user="$currUser" />
+                @include('profile.card', ['user' => $currUser])
             @endforeach
        </div>
     </x-section>

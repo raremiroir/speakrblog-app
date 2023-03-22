@@ -17,8 +17,8 @@
    <span class="text-lg text-gray-700 dark:text-gray-300 font-medium">Users</span>
    <ul>
       @if ($users->count() > 0)
-         @foreach ($users as $user)
-            <x-user-card :user="$user" />
+         @foreach ($users as $currUser)
+            @include('profile.card', ['user' => $currUser])
          @endforeach
       @else
          <li class="text-gray-400 dark:text-gray-500">No users found</li>
