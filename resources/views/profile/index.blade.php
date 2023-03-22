@@ -11,11 +11,11 @@
        </x-header>
    </x-slot>
 
-   <div class="w-11/12 lg:w-4/5 mx-auto">
-      <div class="mt-12 flex flex-row flex-wrap gap-4">
-         @foreach($users as $currUser)
-            <x-user-card :user="$currUser" />
-         @endforeach
-      </div>
-   </div>
+    <x-section>
+       <div class="flex flex-row flex-wrap gap-4">
+            @foreach($users as $currUser)
+                <x-user-card :user="$currUser" />
+            @endforeach
+       </div>
+    </x-section>
 </x-app-layout>

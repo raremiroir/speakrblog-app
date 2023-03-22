@@ -1,82 +1,64 @@
-<x-app-layout>
+<x-app-layout hasAside>
     <x-slot name="header">
-        <div class="w-4/5 mx-auto flex items-center justify-between"> 
-            <div class="flex flex-col items-start gap-2">
-                {{-- Title --}}
-                <x-header>
-                    {{ $post->title }}
-                </x-header>
-                {{-- Tags --}}
-                <div class="flex flex-wrap gap-2 pl-4">
-                    @foreach ($post->tags as $tag)
-                        <x-tag :tag="$tag" />
-                    @endforeach
-                </div>
-            </div>
+        <div class="flex flex-col items-start justify-between gap-4">
+            {{-- Title --}}
+            <x-header>
+                {{ $post->title }}
+            </x-header>
+            {{-- Tags --}}
+            @include('posts.tags.post-flex', ['post' => $post])
+        </div>
 
-            <div class="flex flex-col gap-2 items-end">
-                @if (Auth::check() && ($post->user_id === Auth::user()->id))
-                    <div class="flex gap-2 justify-end">
-                        <x-btn color="info" size="xs" class="opacity-60 hover:opacity-80" href="{{ route('posts.edit', $post->id) }}">
-                            <i class="fas fa-edit"></i> Edit
-                        </x-btn>
-                        <form method="POST" action="{{ route('posts.destroy', $post->id) }}" class="inline-block">
-                            @csrf
-                            @method('DELETE')
-                            <x-btn type="submit" color="error" size="xs" class="opacity-40 hover:opacity-80">
-                                <i class="fas fa-trash"></i> Delete
-                            </x-btn>
-                        </form>
-                    </div>
-                    <hr class="w-full border-gray-400 dark:border-gray-600 "/>
-                @endif
-                <div class="flex flex-col gap-0 items-end">
-                    <div class="text-gray-500">{{ $post->created_at }}</div>
-                    <div class="text-gray-500">by <a href="{{ route('users.show', $post->user->username) }}" class="text-success/80 font-semibold hover:text-success">{{ $post->user->username }}</a></div>
-                </div>
-            </div>
+        <div class="flex flex-col gap-2 items-end">
+            {{-- Card Options --}}
+            @include('posts.actions.options', ['post' => $post])
+            {{-- Card Info --}}
+            @include('posts.author-text', ['post' => $post, 'size' => 'lg'])
         </div>
     </x-slot>
 
-    <div class="max-w-7xl mx-auto py-4 sm:px-6 lg:px-8 flex flex-col gap-6">
+
+    <x-slot name="aside">
+        {{-- Leave comment --}}
+            <div class="w-full bg-white shadow-lg dark:bg-black/20 rounded-lg py-2 px-4">
+                <h5 class="text-xl font-title text-success/40 dark:text-success-l1/40 mb-2">Leave a comment</h5>
+                <form action="{{ route('posts.comments.store', $post->id) }}" method="POST" class="flex flex-col gap-2">
+                    @csrf
+                    <div class="form-group">
+                        <x-textarea id="body" name="body" rows="16" placeholder="Type your comment here...">
+                            {{ old('body') }}
+                        </x-textarea>
+                        @if ($errors->has('body'))
+                            <div class="invalid-feedback">
+                                {{ $errors->first('body') }}
+                            </div>
+                        @endif
+                    </div>
+                    <div class="flex justify-end">
+                        <x-btn type="submit" color="success">Submit</x-btn>
+                    </div>
+                </form>
+            </div>
+    </x-slot>
+
+    <x-section title="{{ $post->title }}">
         <div class="bg-white dark:bg-gray-500/20 overflow-hidden shadow-xl sm:rounded-lg">
             <div class="p-6 sm:px-20 ">
+                {{-- Body --}}
                 <div class="mb-4 text-black dark:text-white">{!! nl2br(e($post->body)) !!}</div>
-                <div class="flex justify-between">
-                    {{-- <div>
-                        <form method="POST" action="{{ route('posts.like', $post->id) }}">
-                            @csrf
-                            <button type="submit" class="text-blue-500 hover:text-blue-700">
-                                {{ $post->likes()->count() }} {{ Str::plural('Like', $post->likes()->count()) }}
-                            </button>
-                        </form>
-                    </div> --}}
+                {{-- Footer --}}
+                <hr class="opacity-40"/>
+                <div class="flex justify-between mt-4">
+                    {{-- Like/Unlike --}}
+                    @include('posts.actions.btn-like', ['post' => $post])
                 </div>
             </div>
         </div>
+    </x-section>
 
-        {{-- Form for adding comments --}}
-        <div class="w-full bg-white shadow-lg dark:bg-black/20 rounded-lg py-2 px-4">
-            <h5 class="text-xl font-title text-success/40 dark:text-success-l1/40 mb-2">Leave a comment</h5>
-            <form action="{{ route('posts.comments.store', $post->id) }}" method="POST" class="flex flex-col gap-2">
-                @csrf
-                <div class="form-group">
-                    <x-textarea id="body" name="body" placeholder="Type your comment here...">
-                        {{ old('body') }}
-                    </x-textarea>
-                    @if ($errors->has('body'))
-                        <div class="invalid-feedback">
-                            {{ $errors->first('body') }}
-                        </div>
-                    @endif
-                </div>
-                <div class="flex justify-end">
-                    <x-btn type="submit" color="success">Submit</x-btn>
-                </div>
-            </form>
-        </div>
 
-        {{-- Comments --}}
+    {{-- Comments --}}
+    <x-section title="Comments">
         @if ($post->comments->count() > 0)
             <div class="w-full bg-white shadow-lg dark:bg-black/20 rounded-lg py-2 px-4 flex flex-col gap-4">
                 @foreach ($post->comments as $comment)
@@ -84,5 +66,5 @@
                 @endforeach
             </div>
         @endif
-    </div>
+    </x-section>
 </x-app-layout>

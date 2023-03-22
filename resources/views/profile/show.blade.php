@@ -5,7 +5,7 @@
 
 <x-app-layout>
    <x-slot name="header">
-      <div class="flex items-center justify-between w-4/5 mx-auto">
+      <div class="flex items-center justify-between w-full mx-auto">
          <div class="flex flex-row gap-4 items-center">
             <x-profile-avatar :user="$user" size="64" />
             <x-header>
@@ -18,5 +18,8 @@
       </div>
    </x-slot>
 
-   @include('posts.grid', ['posts' => $posts])
+   <x-section>
+      @include('posts.grid', ['posts' => $posts])
+   </x-section>
+
 </x-app-layout>

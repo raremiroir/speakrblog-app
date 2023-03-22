@@ -1,4 +1,4 @@
-<x-app-layout>
+<x-app-layout hasAside asideTitle="Your Info">
     <x-slot name="header">
         <x-header>
             {{ __('Profile') }}
@@ -10,21 +10,51 @@
         </x-header>
     </x-slot>
 
-    <x-main-grid>
-        <x-profile-option-wrap>
-            @include('profile.partials.edit-avatar-form')
-        </x-profile-option-wrap>
+    <x-slot name="aside">
+        <div class="flex gap-4">
+            <x-profile-avatar :user="$user" size="128" />
+            <table>
+                <tr>
+                    <td class="font-medium text-gray-600 dark:text-gray-400">Username:</td>
+                    <td class="font-medium text-gray-600 dark:text-gray-400">{{ $user->username }}</td>
+                </tr>
+                <tr>
+                    <td class="font-medium text-gray-600 dark:text-gray-400">Email:</td>
+                    <td class="font-medium text-gray-600 dark:text-gray-400">{{ $user->email }}</td>
+                </tr>
+                <tr>
+                    <td class="font-medium text-gray-600 dark:text-gray-400">Joined on:</td>
+                    <td class="font-medium text-gray-600 dark:text-gray-400">{{ $user->created_at->format('d/m/Y') }}</td>
+                </tr>
+                <tr>
+                    <td class="font-medium text-gray-600 dark:text-gray-400">Posts:</td>
+                    <td class="font-medium text-gray-600 dark:text-gray-400">{{ $user->posts->count() }}</td>
+                </tr>
+                <tr>
+                    <td class="font-medium text-gray-600 dark:text-gray-400">Comments:</td>
+                    <td class="font-medium text-gray-600 dark:text-gray-400">{{ $user->comments->count() }}</td>
+                </tr>
+            </table>
+        </div>
+    </x-slot>
 
-        <x-profile-option-wrap>
-            @include('profile.partials.update-profile-information-form')
-        </x-profile-option-wrap>
-
-        <x-profile-option-wrap>
-            @include('profile.partials.update-password-form')
-        </x-profile-option-wrap>
-
-        <x-profile-option-wrap>
-            @include('profile.partials.delete-user-form')
-        </x-profile-option-wrap>
-    </x-main-grid>
+    <x-section>
+        <x-main-grid>
+            <x-profile-option-wrap>
+                @include('profile.partials.edit-avatar-form')
+            </x-profile-option-wrap>
+    
+            <x-profile-option-wrap>
+                @include('profile.partials.update-profile-information-form')
+            </x-profile-option-wrap>
+    
+            <x-profile-option-wrap>
+                @include('profile.partials.update-password-form')
+            </x-profile-option-wrap>
+    
+            <x-profile-option-wrap>
+                @include('profile.partials.delete-user-form')
+            </x-profile-option-wrap>
+        </x-main-grid>
+    </x-section>
 </x-app-layout>

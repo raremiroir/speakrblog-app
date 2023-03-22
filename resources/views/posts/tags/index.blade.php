@@ -1,12 +1,22 @@
-<x-app-layout>
+<x-app-layout hasAside asideTitle="Add a Tag">
+
    <x-slot name="header">
       <x-header>
          All Tags
       </x-header>
    </x-slot>
-   <x-section>
+
+   {{-- Aside - Add tag --}}
+   <x-slot name="aside">
       @include('posts.tags.add')
-   </x-section>
+      <x-section title="All Tags">
+          <div class="flex flex-row flex-wrap gap-2">
+              @foreach($tags as $tag)
+                  <x-tag :tag="$tag" size="md" />
+              @endforeach
+          </div>
+          </x-section>
+  </x-slot>
 
    <x-section>
       <div class="flex flex-row flex-wrap gap-2">
@@ -15,4 +25,5 @@
          @endforeach
       </div>
    </x-section>
+   
 </x-app-layout>
