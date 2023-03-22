@@ -20,7 +20,8 @@
 
     <x-slot name="aside">
         {{-- Leave comment --}}
-            <div class="w-full bg-white shadow-lg dark:bg-black/20 rounded-lg py-2 px-4">
+        <div class="relative w-full">
+            <div class="w-full bg-white shadow-lg dark:bg-black/20 rounded-lg py-2 px-4 sticky scroll">
                 <h5 class="text-xl font-title text-success/40 dark:text-success-l1/40 mb-2">Leave a comment</h5>
                 <form action="{{ route('posts.comments.store', $post->id) }}" method="POST" class="flex flex-col gap-2">
                     @csrf
@@ -39,9 +40,10 @@
                     </div>
                 </form>
             </div>
+        </div>
     </x-slot>
 
-    <x-section title="{{ $post->title }}">
+    <x-section>
         <div class="bg-white dark:bg-gray-500/20 overflow-hidden shadow-xl sm:rounded-lg">
             <div class="p-6 sm:px-20 ">
                 {{-- Body --}}
