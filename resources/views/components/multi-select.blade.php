@@ -14,14 +14,16 @@
             </div>
             {{-- Trigger --}}
             <input 
-                type="text" id="{{ $id }}" name="{{ $name }}"
+                type="text" id="{{ $id }}" name="{{ $name }}[]"
                 placeholder="{{ $placeholder }}" 
                 :required="{{ $required ? 'true' : 'false' }}"
                 :disabled="{{ $disabled ? 'true' : 'false' }}" 
+                autocomplete="off"
                 x-ref="input" 
                 x-on:click="open = !open"
                 x-bind:placeholder="selectedOptions.length ? '' : '{{ $placeholder }}'"
                 x-bind:value="selectedOptions"
+                x-value="selectedOptions"
                 x-model="selectedLabels.join('  -  ')"
                 class="
                     block w-full 
