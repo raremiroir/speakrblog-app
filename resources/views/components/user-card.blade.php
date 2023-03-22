@@ -32,9 +32,35 @@
       <h5 class="{{ $active ? 'font-black' : 'font-bold'}} text-xl mb-2 text-success dark:text-success-l1 group-hover:text-success-d1 dark:group-hover:text-success-l2 {{ $transition }}">
             {{ $user->username }} {{ $user->is_admin ? '👑' : '' }}  @if ($active) <span class="text-gray-500">(You)</span> @endif
       </h5>
-      <p class="text-gray-700 dark:text-gray-400 group-hover:text-black dark:group-hover:text-white text-base {{ $transition }}">
-         Lorem ipsum dolor sit amet, consectetur adipisicing elit. Voluptatibus quia, nulla! Maiores et perferendis
-         eaque, exercitationem praesentium nihil.
-      </p>
+      {{-- Info --}}
+      <div class="">
+         <div class="flex flex-row gap-1">
+            <x-button rounded md>
+               <div class="flex flex-col items-center gap-1 text-gray-700 dark:text-gray-300">
+                  <i class="fas fa-mail-bulk"></i>
+                  <span class="text-gray-500 whitespace-nowrap">
+                     {{ $user->posts->count() }}
+                     {{ Str::plural('speak', $user->posts->count()) }}
+                  </span>
+               </div>
+            </x-button>
+            <x-button rounded md>
+               <div class="flex flex-col items-center gap-1 text-gray-700 dark:text-gray-300">
+                  <i class="fas fa-comment-alt"></i>
+                  <span class="text-gray-500 whitespace-nowrap">
+                     {{ $user->comments->count() }}
+                     {{ Str::plural('comment', $user->comments->count()) }}
+                  </span>
+               </div>
+            </x-button>
+            {{-- <div class="flex items-center gap-1">
+               <x-icon name="followers" class="w-4 h-4" />
+               <span class="text-gray-500">{{ $user->followersCount }}</span> --}}
+            {{-- <div class="flex items-center gap-1">
+               <i class="fas fa-heart"></i>
+               <span class="text-gray-500">{{ $user->likesCount }}</span>
+            </div> --}}
+         </div>
+      </div>
    </div>
 </a>
