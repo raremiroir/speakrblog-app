@@ -41,7 +41,10 @@
         <x-section title="All Tags">
             <div class="flex flex-row flex-wrap gap-2">
                 @foreach($tags as $tag)
-                    <x-tag :tag="$tag" size="md" />
+                    @include('posts.tags.tag', [
+                        'tag' => $tag, 
+                        'size' => 'md'
+                        ])
                 @endforeach
             </div>
             </x-section>
@@ -54,8 +57,6 @@
                 You are not allowed to create posts. Please log in or create an account.
             </div>
         @else
-            {{-- Add Tag Form --}}
-
             {{-- Add Post Form --}}
             <form method="POST" action="{{ route('posts.store') }}" class="z-0 isolate">
                 @csrf
@@ -69,7 +70,7 @@
                         'label' => 'Select Tags',
                         'placeholder' => 'Select Tags...',
                         'options' => App\Models\Tag::getTagsAsArray(),
-                        'required' => true,
+                        'required' => false,
                         'disabled' => false,
                     ])
                 </div>
