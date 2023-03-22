@@ -1,7 +1,7 @@
 @if ($post->author->is(auth()->user()) || (Auth::check() && auth()->user()->is_admin))
    <x-dropdown>
       <x-slot name="trigger">
-         <x-button flat>
+         <x-button flat gray sm>
             <i class="fas fa-cog"></i> Options
          </x-button>
       </x-slot>
