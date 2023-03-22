@@ -25,16 +25,16 @@
                 <!-- Navigation Links -->
                 <div class="hidden space-x-8 sm:space-x-4 md:space-x-8 sm:-my-px sm:ml-10 sm:flex">
                     <x-nav-link :href="route('posts.index')" :active="request()->routeIs('posts.index')">
-                        {{ __('Speaks') }}
+                        Speaks
                     </x-nav-link>
                     <x-nav-link :href="route('posts.add')" :active="request()->routeIs('posts.add')">
-                        {{ __('Speak your Mind') }}
+                        Speak your Mind
                     </x-nav-link>
                     <x-nav-link :href="route('users.index')" :active="request()->routeIs('users.index')">
-                        {{ __('Speakrs') }}
+                        Speakrs
                     </x-nav-link>
                     <x-nav-link :href="route('posts.tags.index')" :active="request()->routeIs('posts.tags.index')">
-                        {{ __('Tags') }}
+                        Tags
                     </x-nav-link>
                 </div>
             </div>
@@ -44,9 +44,9 @@
                 <x-search-bar />
                 <!-- Settings Dropdown (only show when logged in) -->
                 @auth
-                    <x-dropdown align="right" width="48">
+                    <x-dropdown>
                         <x-slot name="trigger">
-                            <x-btn color="primary" size="sm">
+                            <x-button secondary>
                                 <div class="flex items-center gap-2 sm:gap-0 md:gap-2">
                                     <x-profile-avatar :user="Auth::user()" size="22" />
                                     <div class="sm:hidden md:flex">{{ Auth::user()->username }}</div>
@@ -57,29 +57,38 @@
                                         </svg>
                                     </div>
                                 </div>
-                            </x-btn>
+                            </x-button>
                         </x-slot>
 
-                        <x-slot name="content">
-                            <x-dropdown-link :href="route('users.show', Auth::user()->username)">
-                                <i class="fas fa-user-circle"></i> {{ __('My Profile') }}
-                            </x-dropdown-link>
-
-                            <x-dropdown-link :href="route('profile.edit')">
-                                <i class="fas fa-user-cog"></i> {{ __('Account Settings') }}
-                            </x-dropdown-link>
-
+                        <x-dropdown.header label="{{ Auth::user()->username }}'s Account">
+                            <div class="h-fit">
+                                <x-button flat sm full href="{{ route('users.show', Auth::user()->username) }}">
+                                    <div class="w-full flex justify-start px-4 gap-2">
+                                        <i class="fas fa-user-circle"></i> My Profile
+                                    </div>
+                                </x-button>
+                            </div>
+                            <div class="h-fit">
+                                <x-button info flat sm full href="{{ route('profile.edit') }}">
+                                    <div class="w-full flex justify-start px-4 gap-2">
+                                        <i class="fas fa-user-cog"></i> Account Settings
+                                    </div>
+                                </x-button>
+                            </div>
+                            <hr class="border-gray-400 dark:border-gray-600 my-1" />
                             <!-- Authentication -->
-                            <form method="POST" action="{{ route('logout') }}">
-                                @csrf
+                            <div class="h-fit">
+                                <form method="POST" action="{{ route('logout') }}" class="w-full h-fit">
+                                    @csrf
 
-                                <x-dropdown-link :href="route('logout')"
-                                        onclick="event.preventDefault();
-                                                    this.closest('form').submit();">
-                                    <i class="fas fa-sign-out-alt"></i> {{ __('Log Out') }}
-                                </x-dropdown-link>
-                            </form>
-                        </x-slot>
+                                    <x-button type="submit" negative sm flat full onclick="event.preventDefault(); this.closest('form').submit();">
+                                        <div class="w-full flex justify-start px-4 gap-2 text-error dark:text-error-l1 font-regular opacity-80">
+                                            <i class="fas fa-sign-out-alt"></i> Log Out
+                                         </div>
+                                    </x-button>
+                                </form>
+                            </div>
+                        </x-dropdown.header>
                     </x-dropdown>
                 @else
                     <x-login-register-btn/>
