@@ -4,13 +4,15 @@
          All Tags
       </x-header>
    </x-slot>
-   <div class="">
+   <x-section>
       @include('posts.tags.add')
-   </div>
+   </x-section>
 
-   <div class="flex flex-wrap gap-2 mx-auto w-4/5">
-      @foreach($tags as $tag)
-         <x-tag :tag="$tag" size="lg" />
-      @endforeach
-   </div>
+   <x-section>
+      <div class="flex flex-row flex-wrap gap-2">
+         @foreach($tags as $tag)
+            <x-tag :tag="$tag" size="lg" />
+         @endforeach
+      </div>
+   </x-section>
 </x-app-layout>
