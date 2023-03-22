@@ -1,7 +1,7 @@
 <nav 
     x-data="{ open: false }" 
     class="
-        fixed w-full shadow-lg
+        fixed w-full shadow-lg z-[999]
         bg-white dark:bg-gray-800 
         border-gray-100 dark:border-gray-700">
     <!-- Primary Navigation Menu -->
