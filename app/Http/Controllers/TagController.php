@@ -82,4 +82,10 @@ class TagController extends Controller
         $users = $tag->posts()->with('user')->get()->pluck('user')->unique();
         return view('posts.tags.users', compact('tag', 'users'));
     }
+
+    // Return all tags in json format
+    public function json() {
+        $tags = Tag::all();
+        return response()->json($tags);
+    }
 }

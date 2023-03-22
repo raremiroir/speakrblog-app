@@ -129,5 +129,11 @@ class PostController extends Controller
         return view('posts.tags.index', compact('tags'));
     }
 
+    // Return all posts in json format
+    public function json() {
+        $posts = Post::all();
+        return response()->json($posts);
+    }
+
     
 }
