@@ -26,14 +26,23 @@
             {{ $user->username }} {{ $user->is_admin ? '👑' : '' }}  @if ($active) <span class="text-gray-500">(You)</span> @endif
       </h5>
       {{-- Info --}}
-      <div class="">
-         <div class="flex flex-row gap-1">
+      <div class="flex flex-col gap-1 items-center">
+         <div class="flex flex-row gap-1 justify-center">
+            {{-- Follow user --}}
+            @include('profile.actions.btn-follow', ['user' => $user])
+            {{-- Followers count --}}
+            @include('profile.info.amt-followers', ['user' => $user])
+            {{-- Following count --}}
+            @include('profile.info.amt-following', ['user' => $user])
+            
+            {{-- Likes received count --}}
+            {{-- Likes given count --}}
+         </div>
+         <div class="flex flex-row gap-1 justify-center">
             {{-- Posts amount --}}
             @include('profile.info.amt-posts', ['user' => $user])
             {{-- Comments amount --}}
             @include('profile.info.amt-comments', ['user' => $user])
-            {{-- Followers count --}}
-            {{-- Following count --}}
             
             {{-- Likes received count --}}
             {{-- Likes given count --}}
