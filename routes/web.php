@@ -75,10 +75,9 @@ Route::middleware(['auth'])->group(function () {
 
 
     // Friendships routes
-    // Route::get('/users/search', [FriendshipController::class, 'search'])->name('users.search');
-    // Route::get('/users/{user}/friends', [FriendshipController::class, 'index'])->name('users.friends');
-    // Route::post('/users/{user}/friendship', [FriendshipController::class, 'store'])->name('users.friendship.store');
-    // Route::delete('/users/{user}/friendship', [FriendshipController::class, 'destroy'])->name('users.friendship.destroy');
+    // Route::get('/users/{user}/following', [ProfileController::class, 'friends'])->name('users.friends');
+    Route::post('/users/{user}/follow', [ProfileController::class, 'follow'])->name('users.follow');
+    Route::delete('/users/{user}/unfollow', [ProfileController::class, 'unfollow'])->name('users.unfollow');
 });
 
 require __DIR__.'/auth.php';
