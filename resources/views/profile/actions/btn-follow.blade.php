@@ -26,7 +26,7 @@
          @endif
       @endif
    @else
-      <x-button href="{{ route('login') }}" secondary sm title="You must be logged in to follow another user.">
+      <x-button href="{{ route('login') }}" secondary sm title="You must be logged in to follow another user">
          <i class="fas fa-user-lock"></i>
          Log-in to Follow
       </x-button>

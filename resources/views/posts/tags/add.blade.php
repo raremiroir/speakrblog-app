@@ -18,8 +18,7 @@
             <x-color-picker
                label="Pick a Color"
                placeholder="Pick a Color" required
-               name="color" id="color" 
-               hslColor="{{$hsl}}"
+               name="color" id="color"
                :colors="[
                   [ 'name' => 'Green',      'value' => '#318748' ],
                   [ 'name' => 'Blue',       'value' => '#336699' ],

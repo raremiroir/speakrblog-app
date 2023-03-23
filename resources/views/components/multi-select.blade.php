@@ -11,7 +11,6 @@
 
 @php
     $selectedOptions = $selectedOptions ? json_encode($selectedOptions) : '[]';
-    var_dump($selectedOptions);
 @endphp
 
 <div x-data="{ open: false, selectedOptions: {{ $selectedOptions }} }" x-cloak>
