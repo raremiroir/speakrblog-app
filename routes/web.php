@@ -32,6 +32,7 @@ Route::get('/posts/tags/{tag}', [PostController::class, 'indexByTag'])->name('po
 // Users
 Route::get('/users', [ProfileController::class, 'index'])->name('users.index');
 Route::get('/users/{user}', [ProfileController::class, 'show'])->name('users.show');
+Route::get('/users/{user}/following', [ProfileController::class, 'friends'])->name('users.friends');
 // Search
 Route::get('/search', [PostController::class, 'search'])->name('search');
 
@@ -75,7 +76,6 @@ Route::middleware(['auth'])->group(function () {
 
 
     // Friendships routes
-    // Route::get('/users/{user}/following', [ProfileController::class, 'friends'])->name('users.friends');
     Route::post('/users/{user}/follow', [ProfileController::class, 'follow'])->name('users.follow');
     Route::delete('/users/{user}/unfollow', [ProfileController::class, 'unfollow'])->name('users.unfollow');
 });
