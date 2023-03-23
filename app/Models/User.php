@@ -79,4 +79,32 @@ class User extends Authenticatable
         return $this->belongsToMany(Comment::class, 'user_likes_comment')->withTimestamps();
     }
 
+    // Get followers of the user
+    public function followers() {
+        return $this->belongsToMany(User::class, 'user_follows_user', 'followed_id', 'follower_id')->withTimestamps();
+    }
+    // Get users the user is following
+    public function following() {
+        return $this->belongsToMany(User::class, 'user_follows_user', 'follower_id', 'followed_id')->withTimestamps();
+    }
+
+    // Follow a user
+    public function follow(User $user) {
+        return $this->following()->attach($user);
+    }
+    // Unfollow a user
+    public function unfollow(User $user) {
+        return $this->following()->detach($user);
+    }
+
+    // Check if the user is following another user
+    public function isFollowing(User $user) {
+        return $this->following()->where('followed_id', $user->id)->exists();
+    }
+
+    // Check if the user is followed by another user
+    public function isFollowedBy(User $user) {
+        return $this->followers()->where('follower_id', $user->id)->exists();
+    }
+
 }

@@ -69,4 +69,27 @@ class ProfileController extends Controller
 
         return Redirect::to('/');
     }
+
+    // Follow another user
+    public function follow(Request $request, User $user): RedirectResponse {
+        // If user is trying to follow themselves, redirect back.
+        if ($request->user()->is($user)) {
+            return Redirect::back();
+        }
+
+        $request->user()->follow($user);
+        
+        return Redirect::back();
+    }
+    // Unfollow another user
+    public function unfollow(Request $request, User $user): RedirectResponse {
+        // If user is trying to follow themselves, redirect back.
+        if ($request->user()->is($user)) {
+            return Redirect::back();
+        }
+
+        $request->user()->unfollow($user);
+
+        return Redirect::back();
+    }
 }
