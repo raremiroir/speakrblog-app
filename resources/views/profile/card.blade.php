@@ -23,13 +23,16 @@
 
    <div class="flex flex-col items-center gap-1">
       <h5 class="{{ $active ? 'font-black' : 'font-bold'}} text-xl mb-2 text-success dark:text-success-l1 group-hover:text-success-d1 dark:group-hover:text-success-l2 {{ $transition }}">
-            {{ $user->username }} {{ $user->is_admin ? '👑' : '' }}  @if ($active) <span class="text-gray-500">(You)</span> @endif
+            {{ $user->username }} {{ $user->is_admin ? '👑' : '' }} 
+            @if ($active) <span class="text-gray-500">(You)</span> @endif
       </h5>
       {{-- Info --}}
       <div class="flex flex-col gap-1 items-center">
          <div class="flex flex-row gap-1 justify-center">
             {{-- Follow user --}}
-            @include('profile.actions.btn-follow', ['user' => $user])
+            @if ($user !== Auth::user() && Auth::check())
+               @include('profile.actions.btn-follow', ['user' => $user])
+            @endif
             {{-- Followers count --}}
             @include('profile.info.amt-followers', ['user' => $user])
             {{-- Following count --}}
