@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\ImageController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\PostController;
 use App\Http\Controllers\CommentController;
@@ -21,18 +22,22 @@ use Illuminate\Support\Facades\Route;
 /* ========================
     Public routes 
 ======================== */
-Route::get('/', [PostController::class, 'index'])->name('posts.index');
-Route::get('/home', [PostController::class, 'index'])->name('home');
 
 // Posts
-Route::get('/posts/add', [PostController::class, 'create'])->name('posts.add');
-Route::post('/posts', [PostController::class, 'store'])->name('posts.store');
-Route::get('/posts/{post}', [PostController::class, 'show'])->name('posts.show');
-Route::get('/posts/tags/{tag}', [PostController::class, 'indexByTag'])->name('posts.indexByTag');
+Route::controller(PostController::class)->group(function() {
+    Route::get( '/',                 'index'     )->name('posts.index');
+    Route::get( '/home',             'index'     )->name('home');
+    Route::get( '/posts/add',        'create'    )->name('posts.add');
+    Route::post('/posts',            'store'     )->name('posts.store');
+    Route::get( '/posts/{post}',     'show'      )->name('posts.show');
+    Route::get( '/posts/tags/{tag}', 'indexByTag')->name('posts.indexByTag');
+});
 // Users
-Route::get('/users', [ProfileController::class, 'index'])->name('users.index');
-Route::get('/users/{user}', [ProfileController::class, 'show'])->name('users.show');
-Route::get('/users/{user}/following', [ProfileController::class, 'friends'])->name('users.friends');
+Route::controller(ProfileController::class)->group(function() {
+    Route::get('/users',                  'index'  )->name('users.index');
+    Route::get('/users/{user}',           'show'   )->name('users.show');
+    Route::get('/users/{user}/following', 'friends')->name('users.friends');
+});
 // Search
 Route::get('/search', [PostController::class, 'search'])->name('search');
 
@@ -41,43 +46,59 @@ Route::get('/search', [PostController::class, 'search'])->name('search');
 ======================== */
 Route::middleware(['auth'])->group(function () {
     // Profile routes
-    Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
-    Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
-    Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
+    Route::controller(ProfileController::class)->group(function() {
+        Route::get(   '/profile', 'edit'   )->name('profile.edit');
+        Route::patch( '/profile', 'update' )->name('profile.update');
+        Route::delete('/profile', 'destroy')->name('profile.destroy');
+    });
     
     // Posts routes
-    Route::get('/posts', [PostController::class, 'index'])->name('posts');
-    Route::get('/posts/add', [PostController::class, 'create'])->name('posts.add');
-    Route::post('/posts', [PostController::class, 'store'])->name('posts.store');
-    Route::get('/posts/{post}', [PostController::class, 'show'])->name('posts.show');
-    Route::get('/posts/{post}/edit', [PostController::class, 'edit'])->name('posts.edit');
-    Route::put('/posts/{post}', [PostController::class, 'update'])->name('posts.update');
-    Route::post('/posts/{post}/like', [PostController::class, 'like'])->name('posts.like');
-    Route::delete('/posts/{post}/unlike', [PostController::class, 'unlike'])->name('posts.unlike');
-    Route::delete('/posts/{post}', [PostController::class, 'destroy'])->name('posts.destroy');
+    Route::controller(PostController::class)->group(function() {
+        Route::get(   '/posts',               'index'  )->name('posts');
+        Route::get(   '/posts/add',           'create' )->name('posts.add');
+        Route::post(  '/posts',               'store'  )->name('posts.store');
+        Route::get(   '/posts/{post}',        'show'   )->name('posts.show');
+        Route::get(   '/posts/{post}/edit',   'edit'   )->name('posts.edit');
+        Route::put(   '/posts/{post}',        'update' )->name('posts.update');
+        Route::post(  '/posts/{post}/like',   'like'   )->name('posts.like');
+        Route::delete('/posts/{post}/unlike', 'unlike' )->name('posts.unlike');
+        Route::delete('/posts/{post}',        'destroy')->name('posts.destroy');
+    });
 
     // Comments routes
-    Route::get('/posts/{post}/comments/create', [CommentController::class, 'create'])->name('posts.comments.create');
-    Route::post('/posts/{post}/comments', [CommentController::class, 'store'])->name('posts.comments.store');
-    Route::get('/posts/{post}/comments/{comment}/edit', [CommentController::class, 'edit'])->name('posts.comments.edit');
-    Route::put('/posts/{post}/comments/{comment}', [CommentController::class, 'update'])->name('posts.comments.update');
-    Route::post('/posts/{post}/comments/{comment}/like', [CommentController::class, 'like'])->name('posts.comments.like');
-    Route::delete('/posts/{post}/comments/{comment}/unlike', [CommentController::class, 'unlike'])->name('posts.comments.unlike');
-    Route::delete('/posts/{post}/comments/{comment}', [CommentController::class, 'destroy'])->name('posts.comments.destroy');
+    Route::controller(CommentController::class)->group(function() {
+        Route::get(   '/posts/{post}/comments/create',           'create' )->name('posts.comments.create');
+        Route::post(  '/posts/{post}/comments',                  'store'  )->name('posts.comments.store');
+        Route::get(   '/posts/{post}/comments/{comment}/edit',   'edit'   )->name('posts.comments.edit');
+        Route::put(   '/posts/{post}/comments/{comment}',        'update' )->name('posts.comments.update');
+        Route::post(  '/posts/{post}/comments/{comment}/like',   'like'   )->name('posts.comments.like');
+        Route::delete('/posts/{post}/comments/{comment}/unlike', 'unlike' )->name('posts.comments.unlike');
+        Route::delete('/posts/{post}/comments/{comment}',        'destroy')->name('posts.comments.destroy');
+    });
 
     // Tag routes
-    Route::get('/tags', [TagController::class, 'index'])->name('posts.tags.index');
-    Route::get('/tags/{tag}', [TagController::class, 'show'])->name('posts.tags.show');
-    Route::get('/tags/add', [TagController::class, 'create'])->name('posts.tags.add');
-    Route::post('/tags', [TagController::class, 'store'])->name('posts.tags.store');
-    Route::get('/tags/{tag}/edit', [TagController::class, 'edit'])->name('posts.tags.edit');
-    Route::put('/tags/{tag}', [TagController::class, 'update'])->name('posts.tags.update');
-    Route::delete('/tags/{tag}', [TagController::class, 'destroy'])->name('posts.tags.destroy');
+    Route::controller(TagController::class)->group(function() {
+        Route::get(   '/tags',            'index'  )->name('posts.tags.index');
+        Route::get(   '/tags/{tag}',      'show'   )->name('posts.tags.show');
+        Route::get(   '/tags/add',        'create' )->name('posts.tags.add');
+        Route::post(  '/tags',            'store'  )->name('posts.tags.store');
+        Route::get(   '/tags/{tag}/edit', 'edit'   )->name('posts.tags.edit');
+        Route::put(   '/tags/{tag}',      'update' )->name('posts.tags.update');
+        Route::delete('/tags/{tag}',      'destroy')->name('posts.tags.destroy');
+    });
 
 
     // Friendships routes
-    Route::post('/users/{user}/follow', [ProfileController::class, 'follow'])->name('users.follow');
-    Route::delete('/users/{user}/unfollow', [ProfileController::class, 'unfollow'])->name('users.unfollow');
+    Route::controller(ProfileController::class)->group(function() {
+        Route::get(   '/users/{user}/follow',    'follow'   )->name('users.follow');
+        Route::delete('/users/{user}/unfollow',  'unfollow' )->name('users.unfollow');
+    });
+
+    // Image routes
+    Route::controller(ImageController::class)->group(function() {
+        Route::get( '/image-upload', 'index')->name('image.create');
+        Route::post('/image-upload', 'store')->name('image.store');
+    });
 });
 
 require __DIR__.'/auth.php';
