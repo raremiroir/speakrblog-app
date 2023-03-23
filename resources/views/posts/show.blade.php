@@ -10,8 +10,6 @@
         </div>
 
         <div class="flex flex-col gap-2 items-end">
-            {{-- Card Options --}}
-            @include('posts.actions.options', ['post' => $post])
             {{-- Card Info --}}
             @include('posts.author-text', ['post' => $post, 'size' => 'lg'])
         </div>
@@ -42,6 +40,9 @@
             </div>
         </div>
     </x-slot>
+
+    {{-- Card Options --}}
+    @include('posts.actions.options', ['post' => $post])
 
     <x-section>
         <div class="bg-white dark:bg-gray-500/20 overflow-hidden shadow-xl sm:rounded-lg">
