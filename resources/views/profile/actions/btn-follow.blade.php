@@ -7,8 +7,9 @@
                   @csrf
                   @method('DELETE')
                   <x-button type="submit" positive md title="Unfollow {{ $user->username }}">
-                     <div class="flex flex-row items-center gap-1 font-semibold py-2">
+                     <div class="flex flex-row items-center gap-2 font-semibold @if(!isset($extend) || !$extend) py-1 @endif">
                         <i class="fas fa-user-check group-hover:fa-user-minus"></i>
+                        @if (isset($extend) && $extend)Following @endif
                      </div>
                   </x-button>
             </form>
@@ -16,8 +17,9 @@
             <form action="{{ route('users.follow', $user) }}" method="POST">
                   @csrf
                   <x-button type="submit" positive outline orange md title="Follow {{ $user->username }}">
-                     <div class="flex flex-row items-center gap-1 font-semibold py-2">
+                     <div class="flex flex-row items-center gap-2 font-semibold @if(!isset($extend) || !$extend) py-1 @endif">
                         <i class="fas fa-user-plus"></i>
+                        @if (isset($extend) && $extend)Follow @endif
                      </div>
                   </x-button>
             </form>
