@@ -70,6 +70,17 @@ class ProfileController extends Controller
         return Redirect::to('/');
     }
 
+    // Display the user's followers and following.
+    public function friends(Request $request, User $user): View {
+        $followers = $user->followers()->paginate(20);
+        $following = $user->following()->paginate(20);
+        return view('profile.friends', [
+            'user' => $user,
+            'followers' => $followers,
+            'following' => $following,
+        ]);
+    }
+
     // Follow another user
     public function follow(Request $request, User $user): RedirectResponse {
         // If user is trying to follow themselves, redirect back.
