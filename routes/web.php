@@ -48,7 +48,8 @@ Route::middleware(['auth'])->group(function () {
     // Profile routes
     Route::controller(ProfileController::class)->group(function() {
         Route::get(   '/profile', 'edit'   )->name('profile.edit');
-        Route::patch( '/profile', 'update' )->name('profile.update');
+        Route::patch( '/profile/update', 'update' )->name('profile.update');
+        Route::patch( '/profile/update/avatar', 'updateAvatar' )->name('profile.update_avatar');
         Route::delete('/profile', 'destroy')->name('profile.destroy');
     });
     
