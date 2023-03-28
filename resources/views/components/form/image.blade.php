@@ -1,5 +1,7 @@
 @php
    $transition = $transition ?? 'transition-all ease-in-out duration-200';
+
+   $imagesPath = public_path('images/user/');
 @endphp
 <form action="{{ route('image.store') }}" method="POST" enctype="multipart/form-data" id="image-input-form">
    @csrf
@@ -45,7 +47,7 @@
          @if ($message = Session::get('success'))
             <div class="flex flex-row gap-1 items-center justify-between">
                <div class="aspect-1 w-20 h-auto rounded-full border-2 p-1 border-success overflow-hidden">
-                  <img src="{{ asset('images/users/'.Session::get('image')) }}" class="w-full h-full object-cover" alt="">
+                  <img src="{{ $imagesPath.Session::get('image') }}" class="w-full h-full object-cover" alt="">
                </div>
                <strong class="bg-success-l1/20 dark:bg-success-l2/10 text-success-d1 dark:text-success-l2 py-1 px-2 rounded-full h-fit flex items-center justify-center">
                   {{ $message }}
