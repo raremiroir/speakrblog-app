@@ -11,28 +11,17 @@
     </x-slot>
 
     <x-slot name="aside">
-        <div class="flex gap-4">
-            <x-profile-avatar :user="$user" size="128" />
+        <div class="flex flex-col gap-4">
+            @include('profile.card', ['user' => $user])
             <table>
                 <tr>
-                    <td class="font-medium text-gray-600 dark:text-gray-400">Username:</td>
-                    <td class="font-medium text-gray-600 dark:text-gray-400">{{ $user->username }}</td>
-                </tr>
-                <tr>
                     <td class="font-medium text-gray-600 dark:text-gray-400">Email:</td>
-                    <td class="font-medium text-gray-600 dark:text-gray-400">{{ $user->email }}</td>
+                    <td class="text-gray-600 dark:text-gray-400 font-semibold">{{ $user->email }}</td>
                 </tr>
                 <tr>
                     <td class="font-medium text-gray-600 dark:text-gray-400">Joined on:</td>
-                    <td class="font-medium text-gray-600 dark:text-gray-400">{{ $user->created_at->format('d/m/Y') }}</td>
+                    <td class="text-gray-600 dark:text-gray-400 font-semibold">{{ $user->created_at->format('d/m/Y') }}</td>
                 </tr>
-                <tr>
-                    <td class="font-medium text-gray-600 dark:text-gray-400">Posts:</td>
-                    <td class="font-medium text-gray-600 dark:text-gray-400">{{ $user->posts->count() }}</td>
-                </tr>
-                <tr>
-                    <td class="font-medium text-gray-600 dark:text-gray-400">Comments:</td>
-                    <td class="font-medium text-gray-600 dark:text-gray-400">{{ $user->comments->count() }}</td>
                 </tr>
             </table>
         </div>
