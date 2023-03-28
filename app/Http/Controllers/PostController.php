@@ -11,6 +11,7 @@ use Illuminate\View\View;
 
 class PostController extends Controller
 {
+
     // Display all posts
     public function index() {
         $posts = Post::with('user')->latest()->paginate(20);
@@ -27,6 +28,15 @@ class PostController extends Controller
 
     // Store a new post in the database
     public function store(Request $request) {
+
+        // Get id of last post in database
+        $lastPost = Post::latest()->first();
+        $lastPostId = $lastPost->id ?? 0;
+        $currentId = $lastPostId + 1;
+
+        // Create slug from title & username
+        $slug = \App\Helpers\AppHelper::instance()->str_to_slug($request->input('title'), $currentId);
+
         // Validate the request data
         $request->validate([
             'tags' => 'array|nullable',
@@ -39,6 +49,7 @@ class PostController extends Controller
         // Assign the required request data to the post
         $post->title = $request->input('title');
         $post->body = $request->input('body');
+        $post->slug = $slug;
         // Assign the authenticated user to the post
         $post->user_id = Auth::id();
         // Save the post
@@ -64,10 +75,11 @@ class PostController extends Controller
     }
 
     // Display form to edit existing post
-    public function edit(Post $post) {
+    public function edit($slug) {
+
+        $post = Post::where('slug', $slug)->firstOrFail();
 
         $tags = Tag::all();
-
         return view('posts.edit', compact('post', 'tags'));
     }
 
