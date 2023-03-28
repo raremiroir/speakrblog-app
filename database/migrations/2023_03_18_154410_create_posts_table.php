@@ -13,11 +13,11 @@ return new class extends Migration
     {
         Schema::create('posts', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('user_id')->constrained('users', 'id');
-            $table->string('title');
-            $table->text('body');
-            $table->timestamps();
-            $table->softDeletes();
+            $table->foreignId('user_id')->constrained('users', 'id');   // foreign key to users table
+            $table->string('title'); // title of post
+            $table->text('body');    // content of post
+            $table->timestamps();    // created_at, updated_at
+            $table->softDeletes();   // deleted_at
         });
     }
 
