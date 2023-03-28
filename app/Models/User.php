@@ -107,4 +107,10 @@ class User extends Authenticatable
         return $this->followers()->where('follower_id', $user->id)->exists();
     }
 
+    // Change the user's avatar
+    public function changeAvatar($avatar) {
+        $this->avatar = $avatar;
+        $this->save();
+    }
+
 }
