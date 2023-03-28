@@ -29,7 +29,6 @@
             @method('patch')
 
             {{-- Hidden input gets tempImagePath --}}
-            @php var_dump($tempImagePath); @endphp
             <input type="hidden" name="avatar" value="{{ $tempImagePath }}">
    
             <div class="flex items-center gap-4">
