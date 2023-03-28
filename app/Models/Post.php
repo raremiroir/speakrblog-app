@@ -16,6 +16,11 @@ class Post extends Model
         'user_id',
     ];
 
+    // Use the slug instead of the id
+    public function getRouteKeyName() {
+        return 'slug';
+    }
+
     public function user()
     {
         return $this->belongsTo(User::class);
