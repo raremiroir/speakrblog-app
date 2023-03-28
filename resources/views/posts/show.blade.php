@@ -21,7 +21,7 @@
         <div class="relative w-full">
             <div class="w-full bg-white shadow-lg dark:bg-black/20 rounded-lg py-2 px-4 sticky scroll">
                 <h5 class="text-xl font-title text-success/40 dark:text-success-l1/40 mb-2">Leave a comment</h5>
-                <form action="{{ route('posts.comments.store', $post->id) }}" method="POST" class="flex flex-col gap-2">
+                <form action="{{ route('posts.comments.store', $post->slug) }}" method="POST" class="flex flex-col gap-2">
                     @csrf
                     <div class="form-group">
                         <x-textarea id="body" name="body" rows="16" placeholder="Type your comment here...">

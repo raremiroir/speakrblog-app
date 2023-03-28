@@ -25,7 +25,7 @@
                 @if (auth()->check() &&
                         (auth()->user()->isAdmin() ||
                             auth()->user()->id == $comment->user_id))
-                    <form action="{{ route('posts.comments.destroy', [$post->id, $comment->id]) }}" method="POST">
+                    <form action="{{ route('posts.comments.destroy', [$post->slug, $comment->id]) }}" method="POST">
                         @csrf
                         @method('DELETE')
                         <x-button type="submit" negative sm class="opacity-60 hover:opacity-100">

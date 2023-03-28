@@ -2,7 +2,7 @@
 <div class="col-md-6">
    @auth
       @if ($post->isLikedByUser(auth()->user()))
-         <form action="{{ route('posts.unlike', $post->id) }}" method="POST">
+         <form action="{{ route('posts.unlike', $post->slug) }}" method="POST">
                @csrf
                @method('DELETE')
                <x-button type="submit" primary sm title="Unlike speak">
@@ -12,7 +12,7 @@
                </x-button>
          </form>
       @else
-         <form action="{{ route('posts.like', $post->id) }}" method="POST" class="opacity-80 hover:opacity-100 transition-all duration-200 ease-in-out">
+         <form action="{{ route('posts.like', $post->slug) }}" method="POST" class="opacity-80 hover:opacity-100 transition-all duration-200 ease-in-out">
                @csrf
                <x-button type="submit" primary sm title="Like speak">
                   <i class="far fa-heart"></i>

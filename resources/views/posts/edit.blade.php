@@ -29,7 +29,7 @@
             </div>
         @else
             {{-- Edit Post Form --}}
-            <form method="POST" action="{{ route('posts.update', $post->id) }}">
+            <form method="POST" action="{{ route('posts.update', $post->slug) }}">
                 @csrf
                 @method('PUT')
 
@@ -63,7 +63,7 @@
                <input type="hidden" name="id" value="{{ $post->id }}">
         
                 <div class="flex items-center justify-end mt-4 gap-4">
-                    <a href={{ route('posts.show', $post->id) }}>
+                    <a href={{ route('posts.show', $post->slug) }}>
                         <x-btn color="error" size="lg" class="opacity-80">
                             Cancel
                         </x-btn>
