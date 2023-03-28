@@ -53,7 +53,7 @@ class ProfileController extends Controller
 
     // Update user's avatar.
     public function updateAvatar(Request $request): RedirectResponse {
-        $request->user()->changeAvatar($request-    >input('avatar'));
+        $request->user()->changeAvatar($request->input('avatar'));
         // Remove temp_image_filepath from session
         $request->session()->forget('temp_image_filepath');
         return Redirect::route('profile.edit')->with('status', 'avatar-updated');
