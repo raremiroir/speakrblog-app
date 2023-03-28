@@ -1,4 +1,4 @@
-<x-btn color="default" size="md">
+<x-button flat md>
     <div class="flex items-center gap-x-2" x-data="{
         dark: @entangle('dark'),
         browserDarkMode() {
@@ -32,4 +32,4 @@
             <i class="fas fa-moon"></i>
         </div>
      </div>
-</x-btn>
+</x-button>
