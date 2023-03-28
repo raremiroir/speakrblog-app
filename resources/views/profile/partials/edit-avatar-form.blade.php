@@ -1,44 +1,64 @@
-<section>
+@php
+    // Get temp image file path from session if it exists, otherwise get the user's avatar
+    $tempImagePath = session('temp_image_filepath') ?? $user->avatar;
+@endphp
+
+<div>
    <header>
        <h2 class="text-lg font-medium text-gray-900 dark:text-gray-100">
-           {{ __('Your Avatar') }}
+           Your Avatar
        </h2>
 
        <p class="mt-1 text-sm text-gray-600 dark:text-gray-400">
-           {{ __("Update your avatar!") }}
+           Update your avatar!
        </p>
    </header>
 
-   <div class="flex gap-4 items-center">
+    <div class="flex flex-col lg:flex-row gap-4 items-center">
 
-      <img src="{{ $user->avatar }}" class="h-32 w-auto border-success p-1 border-4 rounded-full" />
+        @include('profile.avatar', ['user' => $user, 'size' => '128'])
 
-      <form method="post" action="{{ route('profile.update') }}" class="space-y-6">
-          @csrf
-          @method('patch')
-   
-          <div>
-              <x-input-label for="avatar" :value="__('Upload your Avatar here!')" />
-              <x-file-input for="avatar" value="{{ old('avatar') }}" />
-              <x-input-error class="mt-2" :messages="$errors->get('avatar')" />
-          </div>
-   
-          <div class="flex items-center gap-4">
-              <x-btn type="submit" color="primary">
-                  {{ __('Save') }}
-              </x-btn>
-   
-              @if (session('status') === 'profile-updated')
-                  <p
-                      x-data="{ show: true }"
-                      x-show="show"
-                      x-transition
-                      x-init="setTimeout(() => show = false, 2000)"
-                      class="text-sm text-gray-600 dark:text-gray-400"
-                  >{{ __('Saved.') }}</p>
-              @endif
-          </div>
-      </form>
-   </div>
+        @include('components.form.image', [
+            'label' => 'Upload your Avatar here!',
+            // 'value' => old('avatar'),
+            // 'error' => $errors->get('avatar'),
+        ]);
+    
+        <form method="POST" action="{{ route('profile.update_avatar') }}">
+            @csrf
+            @method('patch')
 
-</section>
+            {{-- Hidden input gets tempImagePath --}}
+            @php var_dump($tempImagePath); @endphp
+            <input type="hidden" name="avatar" value="{{ $tempImagePath }}">
+   
+            <div class="flex items-center gap-4">
+                <x-button type="submit" positive>
+                    Save Avatar
+                </x-button>
+   
+                @if (session('status') === 'avatar-updated')
+                    <p
+                        x-data="{ show: true }"
+                        x-show="show"
+                        x-transition
+                        x-init="setTimeout(() => show = false, 3000)"
+                        class="text-success dark:text-success-l1"
+                    >
+                        Saved.
+                    </p>
+                @elseif (session('status') === 'avatar-update-failed')
+                    <p
+                        x-data="{ show: true }"
+                        x-show="show"
+                        x-transition
+                        x-init="setTimeout(() => show = false, 3000)"
+                        class="text-error dark:text-error-l1"
+                    >
+                        Failed to save avatar.
+                    </p>
+                @endif
+            </div>
+        </form>
+    </div>
+</div>
