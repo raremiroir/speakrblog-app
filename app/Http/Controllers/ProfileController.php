@@ -51,6 +51,14 @@ class ProfileController extends Controller
         return Redirect::route('profile.edit')->with('status', 'profile-updated');
     }
 
+    // Update user's avatar.
+    public function updateAvatar(Request $request): RedirectResponse {
+        $request->user()->changeAvatar($request-    >input('avatar'));
+        // Remove temp_image_filepath from session
+        $request->session()->forget('temp_image_filepath');
+        return Redirect::route('profile.edit')->with('status', 'avatar-updated');
+    }
+
     // Confirm that the user would like to delete their account.
     public function destroy(Request $request): RedirectResponse {
         $request->validateWithBag('userDeletion', [
