@@ -21,7 +21,11 @@
                {{-- Info --}}
                <div class="flex flex-col gap-1 items-start justify-between">
                   <div class="flex flex-row gap-2 items-center justify-start">
-                     @include('profile.actions.btn-follow', ['user' => $user, 'extend' => true])
+                     @if (Auth::check() && Auth::user()->id === $user->id)
+                        <a href="{{ route('profile.edit', $user->username) }}" class="text-sm text-gray-600 dark:text-gray-400 hover:underline">Edit profile</a>
+                     @else
+                        @include('profile.actions.btn-follow', ['user' => $user, 'extend' => true])
+                     @endif
                      @include('profile.info.amt-followers', ['user' => $user, 'extend' => true])
                      @include('profile.info.amt-following', ['user' => $user, 'extend' => true])
                   </div>
