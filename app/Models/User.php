@@ -33,6 +33,7 @@ class User extends Authenticatable
     protected $hidden = [
         'password',
         'remember_token',
+        'is_admin'
     ];
 
     /**
@@ -58,11 +59,6 @@ class User extends Authenticatable
     // Get the likes for the user on posts.
     public function likedPosts() {
         return $this->belongsToMany(Post::class, 'user_likes_post')->withTimestamps();
-    }
-
-    // Check if the user is an admin
-    public function isAdmin() {
-        return $this->role === 'admin';
     }
 
     // Search function
