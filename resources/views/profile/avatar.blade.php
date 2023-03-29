@@ -1,3 +1,10 @@
+@php
+   // Check if image path starts with 'images/users/' and if not, it's a URL
+   $user->avatar = Str::startsWith($user->avatar, 'images/users/')
+      ? asset($user->avatar)
+      : $user->avatar;
+@endphp
+
 <img 
    src="{{ $user->avatar }}" alt="{{ $user->name }}" 
    width="{{ $size }}" height="{{ $size }}"
