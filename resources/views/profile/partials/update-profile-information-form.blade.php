@@ -18,9 +18,10 @@
         @method('patch')
 
         <div>
-            <x-input-label for="name" :value="__('Name')" />
-            <x-text-input id="name" name="name" type="text" class="mt-1 block w-full" :value="old('name', $user->username)" required autofocus autocomplete="name" />
-            <x-input-error class="mt-2" :messages="$errors->get('name')" />
+            <x-input-label for="name" :value="__('Userame')" />
+            <x-input type="text" id="name" name="name" disabled value="{{old('name', $user->username)}}" />
+            {{-- <x-text-input id="name" name="name" type="text" class="mt-1 block w-full" :value="old('name', $user->username)" required autofocus autocomplete="name" /> --}}
+            <span class="italic text-gray-500 font-regular text-sm">You cannot edit your username.</span>
         </div>
 
         <div>
