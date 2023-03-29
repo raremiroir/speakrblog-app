@@ -23,7 +23,7 @@
                 ])
 
                 @if (auth()->check() &&
-                        (auth()->user()->isAdmin() ||
+                        (auth()->user()->is_admin ||
                             auth()->user()->id == $comment->user_id))
                     <form action="{{ route('posts.comments.destroy', [$post->slug, $comment->id]) }}" method="POST">
                         @csrf
