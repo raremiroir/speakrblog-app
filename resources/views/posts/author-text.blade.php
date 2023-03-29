@@ -21,7 +21,10 @@
          <div class="{{ $size == 'lg' ? 'hidden' : '' }}">
             <x-profile-avatar :user="$post->user" />
          </div>
-         Spoken by {{ $post->user->username }}&nbsp;
+         Spoken by {{ $post->user->username }}
+         @if ($post->user->is_admin)
+            <span class="text-success-d1 dark:text-success-l1 font-light"> 👑 (Admin) </span>
+         @endif
       </a>
       <div class="flex flex-row">
          <span>on&nbsp;</span>

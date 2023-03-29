@@ -23,8 +23,9 @@
 
    <div class="flex flex-col items-center gap-1">
       <h5 class="{{ $active ? 'font-black' : 'font-bold'}} text-xl mb-2 text-success dark:text-success-l1 group-hover:text-success-d1 dark:group-hover:text-success-l2 {{ $transition }}">
-            {{ $user->username }} {{ $user->is_admin ? '👑' : '' }} 
-            @if ($active) <span class="text-gray-500">(You)</span> @endif
+            {{ $user->username }} 
+            @if ($user->is_admin) 👑 <span class="text-warning-600 dark:text-warning-400">(Admin) </span> @endif
+            @if ($active) <span class="text-gray-600 dark:text-gray-400">(You)</span> @endif
       </h5>
       {{-- Info --}}
       <div class="flex flex-col gap-1 items-center">
